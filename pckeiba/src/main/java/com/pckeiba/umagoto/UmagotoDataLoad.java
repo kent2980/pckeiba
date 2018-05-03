@@ -33,7 +33,7 @@ public class UmagotoDataLoad {
 	public UmagotoDataLoad(String raceCode, int hit) {
 		this.raceCode = raceCode;
 		this.hit = hit;
-		setList(raceCode, hit);
+		setUmagotoDataSet(raceCode, hit);
 	}
 
 	public String getRaceCode() {
@@ -42,7 +42,7 @@ public class UmagotoDataLoad {
 
 	public void setRaceCode(String raceCode) {
 		this.raceCode = raceCode;
-		setList(raceCode, hit);
+		setUmagotoDataSet(raceCode, hit);
 	}
 
 	public int getHit() {
@@ -51,7 +51,7 @@ public class UmagotoDataLoad {
 
 	public void setHit(int hit) {
 		this.hit = hit;
-		setList(raceCode, hit);
+		setUmagotoDataSet(raceCode, hit);
 	}
 
 	/**
@@ -62,7 +62,7 @@ public class UmagotoDataLoad {
 		return list;
 	}
 
-	public void setList(String raceCode, int hit) {
+	public void setUmagotoDataSet(String raceCode, int hit) {
 		String sql = "CALL UMAGOTO_DATA(?,?)";
 		Connection con = MyDBConnection.getInstanse().getConnection();
 		list = new ArrayList<>();
