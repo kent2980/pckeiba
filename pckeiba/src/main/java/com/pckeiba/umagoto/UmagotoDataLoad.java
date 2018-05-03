@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-import com.pckeiba.sql.SqlConnection;
+import com.pckeiba.sql.MyDBConnection;
 
 /**
  * レースコードからList<UmagotoDataSet>を取得するクラス
@@ -60,7 +60,7 @@ public class UmagotoDataLoad {
 
 	public void setList(String raceCode, int hit) {
 		String sql = "CALL UMAGOTO_DATA(?,?)";
-		Connection con = SqlConnection.getInstanse().getConnection();
+		Connection con = MyDBConnection.getInstanse().getConnection();
 		list = new ArrayList<>();
 		try {
 			Class.forName("com.mysql.jdbc.Driver");

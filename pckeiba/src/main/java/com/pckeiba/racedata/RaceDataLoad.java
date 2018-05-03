@@ -9,7 +9,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.pckeiba.sql.SqlConnection;
+import com.pckeiba.sql.MyDBConnection;
 
 
 /**
@@ -36,7 +36,7 @@ public class RaceDataLoad {
 	}
 
 	public void setRaceDataSet(String raceCode) {
-		Connection con = SqlConnection.getInstanse().getConnection();
+		Connection con = MyDBConnection.getInstanse().getConnection();
 		String sql = "CALL RACE_SHOSAI(?)";
 		try {
 			Class.forName("com.mysql.jdbc.Driver");

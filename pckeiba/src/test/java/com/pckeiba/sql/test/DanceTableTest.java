@@ -8,7 +8,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.pckeiba.sql.SqlConnection;
+import com.pckeiba.sql.MyDBConnection;
 
 public class DanceTableTest {
 	private List<DanceTableSet> list = new ArrayList<>();
@@ -21,7 +21,7 @@ public class DanceTableTest {
 	public DanceTableTest(String raceCode) {
 		String sql = "CALL TEST(?)";		
 		
-		try(Connection con = SqlConnection.getInstanse().getConnection();
+		try(Connection con = MyDBConnection.getInstanse().getConnection();
 			PreparedStatement pstmt = con.prepareStatement(sql)){
 			
 			pstmt.setString(1, raceCode);

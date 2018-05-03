@@ -5,10 +5,10 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-public class SqlConnection implements Closeable{
-	private static final SqlConnection sc = new SqlConnection();
+public class MyDBConnection implements Closeable{
+	private static final MyDBConnection sc = new MyDBConnection();
 	
-	private SqlConnection() {
+	private MyDBConnection() {
 		try {
 			con = DriverManager.getConnection("jdbc:mysql://192.168.10.60:3306/srun_project?autoReconnect=true&useSSL=false", "root", "kent6839");
 		} catch (SQLException e) {
@@ -17,7 +17,7 @@ public class SqlConnection implements Closeable{
 		}
 	}
 	
-	public static SqlConnection getInstanse() {
+	public static MyDBConnection getInstanse() {
 		return sc;		
 	}
 	
