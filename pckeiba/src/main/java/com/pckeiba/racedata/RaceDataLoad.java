@@ -9,6 +9,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.pckeiba.sql.SqlConnection;
+
 
 /**
  * レースの詳細データを取得するクラス
@@ -17,18 +19,32 @@ import java.util.List;
  *
  */
 public class RaceDataLoad {
-	private final String sql = "CALL RACE_SHOSAI(?)";
-	private RaceDataSet rds;
-	
+	private String raceCode;
+	private RaceDataSet racedataset;
+
 	public RaceDataLoad(String raceCode) {
+		this.raceCode = raceCode;
+		setRaceDataSet(raceCode);
+	}
+
+	public String getRaceCode() {
+		return raceCode;
+	}
+
+	public void setRaceCode(String raceCode) {
+		this.raceCode = raceCode;
+	}
+
+	public void setRaceDataSet(String raceCode) {
+		Connection con = SqlConnection.getInstanse().getConnection();
+		String sql = "CALL RACE_SHOSAI(?)";
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
 		} catch (ClassNotFoundException e1) {
 			System.out.println("MySQLのドライバが見つかりません");
 			e1.printStackTrace();
 		}
-		try(Connection con = DriverManager.getConnection("jdbc:mysql://192.168.10.60:3306/srun_project?autoReconnect=true&useSSL=false", "root", "kent6839");
-			PreparedStatement pstmt = con.prepareStatement(sql)){
+		try(PreparedStatement pstmt = con.prepareStatement(sql)){
 			pstmt.setString(1, raceCode);
 			ResultSet rs = pstmt.executeQuery();
 			rs.absolute(1);
@@ -40,7 +56,7 @@ public class RaceDataLoad {
 			for(int i = 65; i < 69; i++) {
 				kakuTsukaJuni.add(rs.getString(i));
 			}
-			rds = new RaceDataSet(rs.getInt(1),rs.getString(2),rs.getString(3),rs.getInt(4),
+			racedataset = new RaceDataSet(rs.getInt(1),rs.getString(2),rs.getString(3),rs.getInt(4),
 					rs.getInt(5),rs.getInt(6),rs.getString(7),rs.getString(8),rs.getInt(9),rs.getString(10),rs.getString(11),rs.getString(12),
 					rs.getInt(13),rs.getString(14),rs.getString(15),rs.getString(16),rs.getString(17),
 					rs.getString(18),rs.getInt(19),rs.getString(20),rs.getString(21),rs.getInt(22),rs.getInt(23),
@@ -52,8 +68,8 @@ public class RaceDataLoad {
 			System.out.println(e.getMessage());
 		}
 	}
-	
+
 	public RaceDataSet getRaceDataSet() {
-		return rds;
+		return racedataset;
 	}
 }
