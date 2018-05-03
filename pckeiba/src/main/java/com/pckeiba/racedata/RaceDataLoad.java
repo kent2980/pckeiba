@@ -22,6 +22,10 @@ public class RaceDataLoad {
 	private String raceCode;
 	private RaceDataSet racedataset;
 
+	public RaceDataLoad() {
+
+	}
+
 	public RaceDataLoad(String raceCode) {
 		this.raceCode = raceCode;
 		setRaceDataSet(raceCode);
@@ -33,9 +37,10 @@ public class RaceDataLoad {
 
 	public void setRaceCode(String raceCode) {
 		this.raceCode = raceCode;
+		setRaceDataSet(raceCode);
 	}
 
-	public void setRaceDataSet(String raceCode) {
+	private void setRaceDataSet(String raceCode) {
 		Connection con = MyDBConnection.getInstanse().getConnection();
 		String sql = "CALL RACE_SHOSAI(?)";
 		try {

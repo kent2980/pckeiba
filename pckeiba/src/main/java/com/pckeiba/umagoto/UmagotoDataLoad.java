@@ -22,6 +22,10 @@ public class UmagotoDataLoad {
 	private int hit;
 	private List<UmagotoDataSet> list;
 
+	public UmagotoDataLoad() {
+
+	}
+
 	/**
 	 * コンストラクタ 引数はレースコードです。List<UmagotoDataSet>を生成します。
 	 * @param raceCode
