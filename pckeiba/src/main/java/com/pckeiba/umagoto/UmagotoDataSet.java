@@ -87,6 +87,8 @@ public class UmagotoDataSet implements Serializable {
 	private final String mother;
 	private final String grandfather;
 	private final String baba;
+	private final int torokuTosu;
+	private final int shussoTosu;
 	
 	/**
 	 * コンストラクタ finalなプロパティを設定します。
@@ -162,7 +164,7 @@ public class UmagotoDataSet implements Serializable {
 			String kyosoJoken, String trackCode, String tenko, String shibaBabaJotai, String dirtBabaJotai,
 			String kyosomeiHondai, String kyosomeiRyakusho10, String kyosomeiRyakusho6, int kyosomeiKubun,
 			int jushoKaiji, int kyori, String hassoJikoku, BigDecimal srun,  String aiteBamei1, String aiteBamei2, 
-			String father, String mother, String grandFather, int umaID, int srunCount) {
+			String father, String mother, String grandFather, int torokuTosu, int shussoTosu, int umaID, int srunCount) {
 		this.UmaGroup = umaGroup;
 		this.DataKubun = dataKubun;
 		this.raceCode = raceCode;
@@ -229,6 +231,8 @@ public class UmagotoDataSet implements Serializable {
 		this.mother = mother;
 		this.grandfather = grandFather;
 		this.baba = TrackCodeFormat.getBaba(trackCode);
+		this.torokuTosu = torokuTosu;
+		this.shussoTosu = shussoTosu;
 	}
 	
 	/**
@@ -769,5 +773,13 @@ public class UmagotoDataSet implements Serializable {
 
 	public String getGrandfather() {
 		return grandfather;
+	}
+
+	public int getTorokuTosu() {
+		return torokuTosu;
+	}
+
+	public int getShussoTosu() {
+		return shussoTosu;
 	}
 }

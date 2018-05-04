@@ -45,7 +45,7 @@ public class UmagotoDataLoad {
 						rs.getBigDecimal(31),rs.getInt(32),rs.getInt(33),rs.getInt(34),rs.getInt(35),rs.getDouble(36),rs.getInt(37),rs.getBigDecimal(38),rs.getBigDecimal(39),rs.getDouble(40),
 						rs.getString(41),rs.getString(42),rs.getString(43),rs.getString(44),rs.getString(45),rs.getString(46),rs.getString(47),rs.getString(48),rs.getString(49),rs.getString(50),
 						rs.getString(51),rs.getString(52),rs.getString(53),rs.getInt(54),rs.getInt(55),rs.getInt(56),rs.getString(57),rs.getBigDecimal(58),rs.getString(59),rs.getString(60),
-						rs.getString(61), rs.getString(62), rs.getString(63),rs.getInt(64),rs.getInt(65)));
+						rs.getString(61), rs.getString(62), rs.getString(63), rs.getInt(64), rs.getInt(65), rs.getInt(66), rs.getInt(67)));
 			}
 
 		}catch(SQLException e) {
