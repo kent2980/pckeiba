@@ -1,7 +1,8 @@
 com.pckeiba.racecode
 com.pckeiba.racedata
+com.pckeiba.schedule
 com.pckeiba.sql
 com.pckeiba.sql.test
-com.pckeiba.umadata
 com.pckeiba.umagoto
 com.pckeiba.umagoto.test
+com.util
