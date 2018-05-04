@@ -3,7 +3,7 @@ package com.pckeiba.sql.test;
 import java.time.LocalDate;
 
 import com.pckeiba.racecode.RaceCodeSet;
-import com.pckeiba.sql.SqlConnection;
+import com.pckeiba.sql.MyDBConnection;
 import com.pckeiba.umagoto.UmagotoDataLoad;
 import com.pckeiba.umagoto.UmagotoDataSet;
 
@@ -22,8 +22,8 @@ public class SqlConnectionTest {
 		for(UmagotoDataSet set : rds.getList()) {
 			System.out.println(set);
 		}
-		
-		SqlConnection.getInstanse().close();
+
+		MyDBConnection.getInstanse().close();
 	}
 
 }

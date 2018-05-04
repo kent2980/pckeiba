@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-import com.pckeiba.sql.SqlConnection;
+import com.pckeiba.sql.MyDBConnection;
 
 /**
  * レースコードからList<UmagotoDataSet>を取得するクラス
@@ -18,7 +18,7 @@ import com.pckeiba.sql.SqlConnection;
  *
  */
 public class UmagotoDataLoad {
-	private final Connection con = SqlConnection.getInstanse().getConnection();
+	private final Connection con = MyDBConnection.getInstanse().getConnection();
 	private final String sql = "CALL UMAGOTO_DATA(?,?)";
 	private final List<UmagotoDataSet> list = new ArrayList<>();
 

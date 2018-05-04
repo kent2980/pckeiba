@@ -8,22 +8,22 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.pckeiba.sql.SqlConnection;
+import com.pckeiba.sql.MyDBConnection;
 
 public class DanceTableTest {
 	private List<DanceTableSet> list = new ArrayList<>();
-	
+
 	public static void main(String[] args) {
 		List<DanceTableSet> l = new DanceTableTest("2018042908030411").getList();
 		System.out.println(l.size());
 	}
-	
+
 	public DanceTableTest(String raceCode) {
-		String sql = "CALL TEST(?)";		
-		
-		try(Connection con = SqlConnection.getInstanse().getConnection();
+		String sql = "CALL TEST(?)";
+
+		try(Connection con = MyDBConnection.getInstanse().getConnection();
 			PreparedStatement pstmt = con.prepareStatement(sql)){
-			
+
 			pstmt.setString(1, raceCode);
 			ResultSet rs = pstmt.executeQuery();
 			String bamei = "a";
@@ -50,9 +50,9 @@ public class DanceTableTest {
 				}
 				bamei = rs.getString(4);
 			}
-			
+
 		}catch(SQLException e) {
-			
+
 		}
 	}
 
