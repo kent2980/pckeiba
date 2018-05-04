@@ -1,6 +1,7 @@
 package com.pckeiba.umagoto;
 
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -10,15 +11,12 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-import com.pckeiba.sql.MyDBConnection;
-
 /**
  * レースコードからList<UmagotoDataSet>を取得するクラス
  * @author KentaroYoshida
  *
  */
 public class UmagotoDataLoad {
-	private final Connection con = MyDBConnection.getInstanse().getConnection();
 	private final String sql = "CALL UMAGOTO_DATA(?,?)";
 	private final List<UmagotoDataSet> list = new ArrayList<>();
 
@@ -33,7 +31,8 @@ public class UmagotoDataLoad {
 			System.out.println("DBのドライバが見つかりません");
 			e1.printStackTrace();
 		}
-		try(PreparedStatement pstmt = con.prepareStatement(sql)){
+		try(Connection con = DriverManager.getConnection("jdbc:mysql://192.168.10.60:3306/srun_project?autoReconnect=true&useSSL=false", "root", "kent6839");
+			PreparedStatement pstmt = con.prepareStatement(sql)){
 
 			pstmt.setString(1, raceCode);
 			pstmt.setInt(2, hit);

@@ -19,7 +19,7 @@ import java.util.List;
 public class RaceDataLoad {
 	private final String sql = "CALL RACE_SHOSAI(?)";
 	private RaceDataSet rds;
-	
+
 	public RaceDataLoad(String raceCode) {
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
@@ -52,7 +52,7 @@ public class RaceDataLoad {
 			System.out.println(e.getMessage());
 		}
 	}
-	
+
 	public RaceDataSet getRaceDataSet() {
 		return rds;
 	}

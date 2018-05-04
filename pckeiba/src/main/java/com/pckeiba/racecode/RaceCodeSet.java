@@ -1,6 +1,7 @@
 package com.pckeiba.racecode;
 
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -8,7 +9,6 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-import com.pckeiba.sql.MyDBConnection;
 
 public class RaceCodeSet {
 	private String raceCode;
@@ -33,8 +33,8 @@ public class RaceCodeSet {
 
 		//DBからレースコードを取得する
 		String sql = "CALL GET_KAISAI_CODE(?,?)";
-		Connection con = MyDBConnection.getInstanse().getConnection();
-		try(PreparedStatement pstmt = con.prepareStatement(sql)){
+		try(Connection con = DriverManager.getConnection("jdbc:mysql://192.168.10.60:3306/srun_project?autoReconnect=true&useSSL=false", "root", "kent6839");
+			PreparedStatement pstmt = con.prepareStatement(sql)){
 
 			pstmt.setString(1, raceValue.getKeibajo());
 			pstmt.setString(2, dateValue);

@@ -2,6 +2,9 @@ package com.util;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
 public class DateTimeFormat {
@@ -23,9 +26,22 @@ public class DateTimeFormat {
 			return new SimpleDateFormat("HH:mm").format(day);
 		default:
 			return null;
-		} 
+		}
 		}catch(ParseException e) {
 			return null;
 		}
+	}
+
+
+	/**
+	 * LocalDateオブジェクトを指定されたフォーマット文字列に変換します。
+	 * @param format フォーマット
+	 * @param date 日付
+	 * @return フォーマットされた日付文字列
+	 */
+	public static String getDateTimeValue(String format, LocalDate date) {
+		LocalDateTime dateTime = date.atStartOfDay();
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern(format);
+		return dateTime.format(formatter);
 	}
 }

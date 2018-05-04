@@ -25,8 +25,7 @@ public class ListLoadTest {
 		System.out.println(list5.size());
 		//リストからマップを作成する
 		Map<String,UmagotoDataSet> map2 = udl.getMapFromKettoTorokuBango(2);
-		Map<String,UmagotoDataSet> map3 = udl.getMapFromKettoTorokuBango(3);
-		
+
 		System.out.println(map2.size());
 		System.out.println(map2.get(udl.getList().get(0).getKettoTorokuBango()).getKyosomeiHondai());
 		System.out.println(map2.get(udl.getList().get(0).getKettoTorokuBango()).getKyosomeiHondai());
