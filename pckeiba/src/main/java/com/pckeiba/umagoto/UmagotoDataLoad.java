@@ -1,5 +1,6 @@
 package com.pckeiba.umagoto;
 
+import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -18,13 +19,14 @@ import java.util.stream.Collectors;
  */
 public class UmagotoDataLoad {
 	private final String sql = "CALL UMAGOTO_DATA(?,?)";
-	private final List<UmagotoDataSet> list = new ArrayList<>();
+	private final List<UmagotoDataSet> list;
 
 	/**
 	 * コンストラクタ 引数はレースコードです。List<UmagotoDataSet>を生成します。
 	 * @param raceCode
 	 */
 	public UmagotoDataLoad(String raceCode, int hit) {
+		list = new ArrayList<>();
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
 		} catch (ClassNotFoundException e1) {
@@ -77,5 +79,41 @@ public class UmagotoDataLoad {
 			map.put(uma.getKettoTorokuBango(), uma);
 		}
 		return map;
+	}
+
+	/**
+	 * 指定された血統登録番号からDrunを取得します。
+	 * @param kettoTorokuBango
+	 * @return
+	 */
+	public BigDecimal getDrun(String kettoTorokuBango) {
+		List<UmagotoDataSet> l = list.stream().filter(s -> s.getKettoTorokuBango().equals(kettoTorokuBango)).collect(Collectors.toList());
+		BigDecimal drun = new BigDecimal("0.000");
+		BigDecimal i = new BigDecimal("0.000");
+		for(UmagotoDataSet uma : l) {
+			if(uma.getSrunCount()==1) {
+				drun = uma.getSrun().add(drun);
+				i = i.add(new BigDecimal("1.000"));
+			}
+		}
+		drun = drun.divide(i,3,BigDecimal.ROUND_HALF_UP);
+		System.out.println(drun);
+		return drun;
+	}
+
+	public BigDecimal getDrun(int umaban) {
+		String kettoTorokuBango = list.stream().filter(s -> s.getUmaID()==1).filter(s -> s.getUmaban()==umaban).map(s -> s.getKettoTorokuBango()).findFirst().get();
+		List<UmagotoDataSet> l = list.stream().filter(s -> s.getKettoTorokuBango().equals(kettoTorokuBango)).collect(Collectors.toList());
+		BigDecimal drun = new BigDecimal("0.000");
+		BigDecimal i = new BigDecimal("0.000");
+		for(UmagotoDataSet uma : l) {
+			if(uma.getSrunCount()==1) {
+				drun = uma.getSrun().add(drun);
+				i = i.add(new BigDecimal("1.000"));
+			}
+		}
+		drun = drun.divide(i,3,BigDecimal.ROUND_HALF_UP);
+		System.out.println(drun);
+		return drun;
 	}
 }

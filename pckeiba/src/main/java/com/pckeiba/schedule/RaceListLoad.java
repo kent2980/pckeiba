@@ -8,10 +8,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import com.pckeiba.racedata.RaceDataSet;
 import com.util.DateTimeFormat;
@@ -112,5 +111,38 @@ public class RaceListLoad implements Serializable{
 	 */
 	public List<RaceDataSet> getRaceList(){
 		return raceList;
+	}
+
+	/**
+	 * 開催中の競馬場の数を返します。
+	 * @return 開催場所の数
+	 */
+	public int getKeibajoCount() {
+		return (int) raceList.stream()
+							 .map(s -> s.getKeibajo())
+							 .distinct()
+							 .count();
+	}
+
+	/**
+	 * 指定された競馬場のレースリストを返します
+	 * @param keibajo 競馬場
+	 * @return 指定した競馬場のレースリスト
+	 */
+	public List<RaceDataSet> getRaceList(String keibajo){
+		return raceList.stream()
+				       .filter(s -> s.getKeibajo().equals(keibajo))
+				       .collect(Collectors.toList());
+	}
+
+	/**
+	 * 開催中の競馬場名のリストを返します。
+	 * @return 競馬場名のリスト
+	 */
+	public List<String> getKeibajoList(){
+		return raceList.stream()
+				       .map(s -> s.getKeibajo())
+				       .distinct()
+				       .collect(Collectors.toList());
 	}
 }
