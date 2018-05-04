@@ -8,6 +8,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,16 +34,13 @@ public class RaceListLoad implements Serializable{
 	/**
 	 * コンストラクタ
 	 */
-	public RaceListLoad(){
-		raceList = new ArrayList<>();
-	}
+	public RaceListLoad(){}
 
 	/**
 	 * コンストラクタ
 	 * @param date 日付
 	 */
 	public RaceListLoad(LocalDate date) {
-		this();
 		this.date = date;
 		setRaceList(date);
 	}
@@ -68,6 +67,14 @@ public class RaceListLoad implements Serializable{
 	 * @param date
 	 */
 	private void setRaceList(LocalDate date) {
+		raceList = new ArrayList<>();
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+		} catch (ClassNotFoundException e1) {
+			// TODO 自動生成された catch ブロック
+			e1.printStackTrace();
+		}
+
 		String kaisai = DateTimeFormat.getDateTimeValue("yyyy-MM-dd HH:mm:ss", date);
 
 		try (Connection con = DriverManager.getConnection("jdbc:mysql://192.168.10.60:3306/srun_project?autoReconnect=true&useSSL=false", "root", "kent6839");
@@ -84,7 +91,7 @@ public class RaceListLoad implements Serializable{
 				for(int i = 65; i < 69; i++) {
 					kakuTsukaJuni.add(rs.getString(i));
 				}
-				raceList.add(new RaceDataSet(rs.getInt(1),rs.getString(2),rs.getString(3),rs.getInt(4),
+				raceList.add(new RaceDataSet(rs.getString(1),rs.getString(2),rs.getString(3),rs.getInt(4),
 						rs.getInt(5),rs.getInt(6),rs.getString(7),rs.getString(8),rs.getInt(9),rs.getString(10),rs.getString(11),rs.getString(12),
 						rs.getInt(13),rs.getString(14),rs.getString(15),rs.getString(16),rs.getString(17),
 						rs.getString(18),rs.getInt(19),rs.getString(20),rs.getString(21),rs.getInt(22),rs.getInt(23),

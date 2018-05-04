@@ -40,7 +40,7 @@ public class RaceDataLoad {
 			for(int i = 65; i < 69; i++) {
 				kakuTsukaJuni.add(rs.getString(i));
 			}
-			rds = new RaceDataSet(rs.getInt(1),rs.getString(2),rs.getString(3),rs.getInt(4),
+			rds = new RaceDataSet(rs.getString(1),rs.getString(2),rs.getString(3),rs.getInt(4),
 					rs.getInt(5),rs.getInt(6),rs.getString(7),rs.getString(8),rs.getInt(9),rs.getString(10),rs.getString(11),rs.getString(12),
 					rs.getInt(13),rs.getString(14),rs.getString(15),rs.getString(16),rs.getString(17),
 					rs.getString(18),rs.getInt(19),rs.getString(20),rs.getString(21),rs.getInt(22),rs.getInt(23),

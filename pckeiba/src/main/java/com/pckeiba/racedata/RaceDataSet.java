@@ -13,10 +13,10 @@ import com.util.TrackCodeFormat;
  */
 public class RaceDataSet implements Serializable{
 	/**
-	 * 
+	 *
 	 */
 	private static final long serialVersionUID = 1L;
-	private int dataKubun;
+	private String dataKubun;
 	private String raceCode;
 	private String kaisaiNenGappi;
 	private int kaisaiKaiji;
@@ -58,9 +58,9 @@ public class RaceDataSet implements Serializable{
 	private int shukaisu4;
 	private String[] kakuTsukaJuni;
 	private String baba;
-	
+
 	public RaceDataSet() {}
-	public RaceDataSet(int dataKubun, String raceCode, String kaisaiNenGappi, int kaisaiKaiji, int kaisaiNichiji,
+	public RaceDataSet(String dataKubun, String raceCode, String kaisaiNenGappi, int kaisaiKaiji, int kaisaiNichiji,
 			int raceBango, String keibajo, String yobi, int Jusho_Kaiji, String kyosomeiHondai, String kyosomeiFukudai, String kyosomeiRyaku10,
 			int kyosomeiKubun, String grade, String kyosoShubetsu, String kyosoKigo, String juryoShubetsu,
 			String kyosoJoken, int kyori, String trackCode, String hassoJikoku, int torokuTosu, int shussoTosu,
@@ -116,7 +116,7 @@ public class RaceDataSet implements Serializable{
 		return baba;
 	}
 
-	public int getDataKubun() {
+	public String getDataKubun() {
 		return dataKubun;
 	}
 
@@ -143,11 +143,11 @@ public class RaceDataSet implements Serializable{
 	public String getKeibajo() {
 		return keibajo;
 	}
-	
+
 	public int getJushoKaiji() {
 		return Jusho_Kaiji;
 	}
-	
+
 	public String getYobi() {
 		return yobi;
 	}
@@ -279,5 +279,5 @@ public class RaceDataSet implements Serializable{
 	public String[] getKakuTsukaJuni() {
 		return kakuTsukaJuni;
 	}
-	
+
 }

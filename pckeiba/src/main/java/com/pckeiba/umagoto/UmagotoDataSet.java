@@ -17,7 +17,7 @@ public class UmagotoDataSet implements Serializable {
 	 * @serial 1.0
 	 */
 	private static final long serialVersionUID = 1L;
-	
+
 	/**
 	 * フィールド
 	 */
@@ -89,7 +89,7 @@ public class UmagotoDataSet implements Serializable {
 	private final String baba;
 	private final int torokuTosu;
 	private final int shussoTosu;
-	
+
 	/**
 	 * コンストラクタ finalなプロパティを設定します。
 	 * @param umaGroup
@@ -163,7 +163,7 @@ public class UmagotoDataSet implements Serializable {
 			double timeSa, String yobi, String grade, String kyosoShubetsu, String kyosoKigo, String juryoShubetsu,
 			String kyosoJoken, String trackCode, String tenko, String shibaBabaJotai, String dirtBabaJotai,
 			String kyosomeiHondai, String kyosomeiRyakusho10, String kyosomeiRyakusho6, int kyosomeiKubun,
-			int jushoKaiji, int kyori, String hassoJikoku, BigDecimal srun,  String aiteBamei1, String aiteBamei2, 
+			int jushoKaiji, int kyori, String hassoJikoku, BigDecimal srun,  String aiteBamei1, String aiteBamei2,
 			String father, String mother, String grandFather, int torokuTosu, int shussoTosu, int umaID, int srunCount) {
 		this.UmaGroup = umaGroup;
 		this.DataKubun = dataKubun;
@@ -234,7 +234,7 @@ public class UmagotoDataSet implements Serializable {
 		this.torokuTosu = torokuTosu;
 		this.shussoTosu = shussoTosu;
 	}
-	
+
 	/**
 	 * レースで使用する馬場を返します。
 	 * @return 馬場
@@ -258,7 +258,7 @@ public class UmagotoDataSet implements Serializable {
 	public int getUmaGroup() {
 		return UmaGroup;
 	}
-	
+
 	/**
 	 * レース区分を返します。<br>成績確定後は7が返されます。
 	 * @return レース区分
@@ -618,7 +618,7 @@ public class UmagotoDataSet implements Serializable {
 	public String getKyosoJoken() {
 		return kyosoJoken;
 	}
-	
+
 	/**
 	 * トラックコードを返します。
 	 * @return トラックコード
@@ -674,9 +674,9 @@ public class UmagotoDataSet implements Serializable {
 	public String getKyosomeiRyakusho6() {
 		return kyosomeiRyakusho6;
 	}
-	
+
 	/**
-	 * 重賞回次[第N回]を本題･副題･カッコ内のうちどれに設定すべきかを示す<br>（0:初期値 1:本題 2:副題 3:カッコ内）重賞のみ設定 
+	 * 重賞回次[第N回]を本題･副題･カッコ内のうちどれに設定すべきかを示す<br>（0:初期値 1:本題 2:副題 3:カッコ内）重賞のみ設定
 	 * @return 競争名区分
 	 */
 	public int getKyosomeiKubun() {

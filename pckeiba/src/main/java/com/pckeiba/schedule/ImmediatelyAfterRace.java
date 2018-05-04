@@ -63,6 +63,12 @@ public class ImmediatelyAfterRace implements Serializable {
 	 * @param date
 	 */
 	private void setKaisaiNenGappi(LocalDate date) {
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+		} catch (ClassNotFoundException e1) {
+			// TODO 自動生成された catch ブロック
+			e1.printStackTrace();
+		}
 		String day = DateTimeFormat.getDateTimeValue("yyyy-MM-dd HH:mm:ss", date);
 		try(Connection con = DriverManager.getConnection("jdbc:mysql://192.168.10.60:3306/srun_project?autoReconnect=true&useSSL=false", "root", "kent6839");
 			PreparedStatement pstmt = con.prepareStatement(sql)){
