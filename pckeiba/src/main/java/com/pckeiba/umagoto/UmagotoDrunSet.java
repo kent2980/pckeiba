@@ -19,9 +19,10 @@ public class UmagotoDrunSet implements Serializable{
 	private final double futanJuryo;
 	private final BigDecimal drun;
 	private final int drunRunk;
+	private final int kakuteiChakujun;
 
 	public UmagotoDrunSet(String kaisaiNenGappi, String raceCode, String kyosomei, int wakuban, int umaban,
-			String bamei, String kettoTorokuBango, double futanJuryo,  BigDecimal drun, int drunRunk) {
+			String bamei, String kettoTorokuBango, double futanJuryo,  BigDecimal drun, int drunRunk, int kakuteiChakujun) {
 		super();
 		this.kaisaiNenGappi = kaisaiNenGappi;
 		this.raceCode = raceCode;
@@ -33,6 +34,7 @@ public class UmagotoDrunSet implements Serializable{
 		this.futanJuryo = futanJuryo;
 		this.drun = drun;
 		this.drunRunk = drunRunk;
+		this.kakuteiChakujun = kakuteiChakujun;
 	}
 
 	public static long getSerialversionuid() {
@@ -77,6 +79,10 @@ public class UmagotoDrunSet implements Serializable{
 
 	public int getDrunRunk() {
 		return drunRunk;
+	}
+
+	public int getKakuteiChakujun() {
+		return kakuteiChakujun;
 	}
 
 }
