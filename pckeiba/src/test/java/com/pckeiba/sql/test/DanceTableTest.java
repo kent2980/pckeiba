@@ -8,6 +8,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.naming.NamingException;
+
 import com.pckeiba.sql.MyDBConnection;
 
 public class DanceTableTest {
@@ -15,43 +17,21 @@ public class DanceTableTest {
 
 	public static void main(String[] args) {
 		List<DanceTableSet> l = new DanceTableTest("2018042908030411").getList();
-		System.out.println(l.size());
 	}
 
 	public DanceTableTest(String raceCode) {
-		String sql = "CALL TEST(?)";
+		String sql = "call Drun_Out(?)";
 
-		try(Connection con = MyDBConnection.getInstanse().getConnection();
-			PreparedStatement pstmt = con.prepareStatement(sql)){
+		try(MyDBConnection con = MyDBConnection.getInstance();
+			PreparedStatement pstmt = con.getPreparedStatement(sql)){
 
 			pstmt.setString(1, raceCode);
 			ResultSet rs = pstmt.executeQuery();
-			String bamei = "a";
-			int i = 0;
-			BigDecimal bd = BigDecimal.ZERO;
 			while(rs.next()) {
-				@SuppressWarnings("unused")
-				DanceTableSet dt = null;
-				if(bamei.equals("a")||!bamei.equals(rs.getString(4))) {
-					i = 0;
-					bd = BigDecimal.ZERO;
-				}
-				i++;
-				if(i <= 5) {
-					@SuppressWarnings("unused")
-					int t = 0;
-					System.out.println(rs.getString(4) + "," + rs.getString(49));
-					list.add(new DanceTableSet(i,rs.getString(4),rs.getString(49)));
-					if(i > 1 && !(rs.getBigDecimal(51) ==null)) {
-						BigDecimal bom = rs.getBigDecimal(51);
-						bd.add(bom);
-						t++;
-					}
-				}
-				bamei = rs.getString(4);
+				System.out.println(rs.getString(6));
 			}
-
-		}catch(SQLException e) {
+			
+		}catch( Exception e) {
 
 		}
 	}

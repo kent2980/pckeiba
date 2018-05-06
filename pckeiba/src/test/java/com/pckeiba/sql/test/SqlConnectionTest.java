@@ -23,7 +23,6 @@ public class SqlConnectionTest {
 			System.out.println(set);
 		}
 
-		MyDBConnection.getInstanse().close();
 	}
 
 }

@@ -1,38 +1,55 @@
 package com.pckeiba.sql;
 
-import java.io.Closeable;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-public class MyDBConnection implements Closeable{
-	private static final MyDBConnection sc = new MyDBConnection();
+import javax.naming.NamingException;
+
+public enum MyDBConnection implements AutoCloseable{
+	INSTANCE;
+	public static MyDBConnection getInstance() {
+		return INSTANCE;
+	}
 	
-	private MyDBConnection() {
+	private static Connection connection;
+
+	public synchronized static Connection getConnection() throws SQLException,NamingException{
 		try {
-			con = DriverManager.getConnection("jdbc:mysql://192.168.10.60:3306/srun_project?autoReconnect=true&useSSL=false", "root", "kent6839");
-		} catch (SQLException e) {
-			System.out.println("データベース接続に失敗しました。エラーコードを確認してください。");
-			System.out.println(e.getStackTrace());
+			Class.forName("com.mysql.jdbc.Driver");
+		} catch (ClassNotFoundException e) {
+			System.out.println("ドライバをロードできません");
+			e.printStackTrace();
+		}
+		try(Connection connection = MyDBConnection.connection){
+			if(MyDBConnection.connection == null || MyDBConnection.connection.isClosed())
+				MyDBConnection.connection = DriverManager.getConnection("jdbc:mysql://192.168.10.60:3306/srun_project?autoReconnect=true&useSSL=false", "root", "kent6839");
+		}
+		return connection;
+	}
+	
+	public PreparedStatement getPreparedStatement(String sql) throws Exception {
+		return getConnection().prepareStatement(sql);
+	}
+	
+	public void commit() throws SQLException {
+		try(Connection connection = MyDBConnection.connection){
+			MyDBConnection.connection.commit();
 		}
 	}
 	
-	public static MyDBConnection getInstanse() {
-		return sc;		
-	}
-	
-	public  Connection getConnection () {
-		return sc.con;
-	}
-	
-	public  void close() {
-		try {
-			con.close();
-		} catch (SQLException e) {
-			System.out.println("データベース接続を終了できませんでした。");
-			System.out.println(e.getStackTrace());
+	public void rollback() throws SQLException {
+		try (Connection connection = MyDBConnection.connection){
+			MyDBConnection.connection.rollback();
 		}
 	}
+	@Override
+	public void close() throws Exception {
+		try(Connection connection = MyDBConnection.connection){
+			MyDBConnection.connection.close();
+		}
+	}
+
 	
-	private Connection con;
 }
