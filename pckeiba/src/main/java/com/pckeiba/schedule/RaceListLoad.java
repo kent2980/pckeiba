@@ -107,7 +107,7 @@ public class RaceListLoad implements Serializable{
 
 	/**
 	 * レースリストを返します。
-	 * @return
+	 * @return レースリスト
 	 */
 	public List<RaceDataSet> getRaceList(){
 		return raceList;

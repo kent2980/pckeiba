@@ -33,8 +33,9 @@ public class ImmediatelyAfterRace implements Serializable {
 	public ImmediatelyAfterRace() {}
 
 	/**
-	 * コンストラクタ。日付を設定します。
-	 * @param date
+	 * コンストラクタ<br>
+	 * 引数に日付を指定してください
+	 * @param date 日付
 	 */
 	public ImmediatelyAfterRace(LocalDate date) {
 		this.date = date;
@@ -43,7 +44,7 @@ public class ImmediatelyAfterRace implements Serializable {
 
 	/**
 	 * 日付を設定します。
-	 * @param date
+	 * @param date 日付
 	 */
 	public void setDate(LocalDate date) {
 		this.date = date;
@@ -60,7 +61,7 @@ public class ImmediatelyAfterRace implements Serializable {
 
 	/**
 	 * 開催年月日を検索します。
-	 * @param date
+	 * @param date 日付
 	 */
 	private void setKaisaiNenGappi(LocalDate date) {
 		try {

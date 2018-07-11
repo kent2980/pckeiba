@@ -10,10 +10,9 @@ import java.util.Date;
 public class DateTimeFormat {
 	/**
 	 * SQLから取り出した日付型文字列を整形します。<br>引数 mode で形式を指定します。１が日付、２が時間を返します。
-	 * @param date
-	 * @param mode
-	 * @return
-	 * @throws ParseException
+	 * @param date 日付
+	 * @param mode 整形モード
+	 * @return 整形後文字列
 	 */
 	public static String dateFormat(String date, int mode) {
 		try {

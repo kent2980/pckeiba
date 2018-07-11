@@ -9,21 +9,43 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-
+/**
+ * 指定された（日付、競馬場、レース番号）からレースコードを生成します
+ * @author kent2
+ *
+ */
 public class RaceCodeSet {
 	private String raceCode;
 	private RaceValue raceValue;
 
+	/**
+	 * コンストラクタ<br>
+	 * （日付、競馬場、レース番号）を引数で指定してください
+	 * @param date 日付
+	 * @param keibajo 競馬場
+	 * @param raceBango レース番号
+	 */
 	public RaceCodeSet(LocalDate date , String keibajo , int raceBango) {
 		this.raceValue = new RaceValue(date, keibajo, raceBango);
 		setRaceCode(raceValue);
 	}
 
+	/**
+	 * レースを指定します<br>
+	 * （日付、競馬場、レース番号）を引数で指定してください
+	 * @param date 日付
+	 * @param keibajo 競馬場
+	 * @param raceBango レース番号
+	 */
 	public void setRaceValue(LocalDate date , String keibajo , int raceBango) {
 		this.raceValue = new RaceValue(date, keibajo, raceBango);
 		setRaceCode(raceValue);
 	}
 
+	/**
+	 * レースデータからレースコードを生成します
+	 * @param raceValue
+	 */
 	private void setRaceCode(RaceValue raceValue) {
 
 		// 日付を文字列として取り出す
@@ -47,10 +69,17 @@ public class RaceCodeSet {
 		}
 	}
 
+	/**
+	 * レースコードを返します
+	 * @return レースコード
+	 */
 	public String getRaceCode() {
 		return raceCode;
 	}
 
+	/**
+	 * レースコード文字列を返します
+	 */
 	@Override
 	public String toString() {
 		return raceCode;

@@ -7,7 +7,10 @@ import com.util.DateTimeFormat;
 import com.util.TrackCodeFormat;
 
 /**
- * 出馬表に使用するためのデータセットクラスです。
+ * 出馬表の詳細データを表すオブジェクト<br>
+ * 各データについてはJRA-VAN DataLab ドキュメントを参照してください<br>
+ * 参照URL：<a href="https://jra-van.jp/dlb/sdv/sdk.html">https://jra-van.jp/dlb/sdv/sdk.html</a><br>
+ * このクラスから生成したインスタンスは直列化されます
  * @author KentaroYoshida
  *
  */
@@ -92,66 +95,73 @@ public class UmagotoDataSet implements Serializable {
 
 	/**
 	 * コンストラクタ finalなプロパティを設定します。
-	 * @param umaGroup
-	 * @param dataKubun
-	 * @param raceCode
-	 * @param kaisaiNenGappi
-	 * @param bamei
-	 * @param keibajo
-	 * @param kaisaiKaiji
-	 * @param kaisaiNichiji
-	 * @param raceBango
-	 * @param wakuban
-	 * @param umaban
-	 * @param kettoTorokuBango
-	 * @param seibetsu
-	 * @param barei
-	 * @param hinshu
-	 * @param moshoku
-	 * @param tozaiShozoku
-	 * @param chokyoshi
-	 * @param banushi
-	 * @param fukushokuHyoji
-	 * @param futanJuryo
-	 * @param blinkerShiyoKubun
-	 * @param kishumei
-	 * @param kishumeiRyakusho
-	 * @param kishuMinarai
-	 * @param bataiju
-	 * @param zogensa
-	 * @param ijoKubun
-	 * @param nyusenJuni
-	 * @param kakuteiChakujun
-	 * @param sohaTime
-	 * @param corner1Juni
-	 * @param corner2Juni
-	 * @param corner3Juni
-	 * @param corner4Juni
-	 * @param tanshoOdds
-	 * @param tanshoNinkijun
-	 * @param kohan4f
-	 * @param kohan3f
-	 * @param timeSa
-	 * @param yobi
-	 * @param grade
-	 * @param kyosoShubetsu
-	 * @param kyosoKigo
-	 * @param juryoShubetsu
-	 * @param kyosoJoken
-	 * @param trackCode
-	 * @param tenko
-	 * @param shibaBabaJotai
-	 * @param dirtBabaJotai
-	 * @param kyosomeiHondai
-	 * @param kyosomeiRyakusho10
-	 * @param kyosomeiRyakusho6
-	 * @param kyosomeiKubun
-	 * @param jushoKaiji
-	 * @param kyori
-	 * @param hassoJikoku
-	 * @param srun
-	 * @param umaID
-	 * @param srunCount
+	 * @param umaGroup 馬番
+	 * @param dataKubun データ区分
+	 * @param raceCode レースコード
+	 * @param kaisaiNenGappi 開催年月日
+	 * @param bamei 馬名
+	 * @param keibajo 競馬場
+	 * @param kaisaiKaiji 開催回次
+	 * @param kaisaiNichiji 開催日次
+	 * @param raceBango レース番号
+	 * @param wakuban 枠番
+	 * @param umaban 馬番
+	 * @param kettoTorokuBango 血統登録番号
+	 * @param seibetsu 性別
+	 * @param barei 馬齢
+	 * @param hinshu 品種
+	 * @param moshoku 毛色
+	 * @param tozaiShozoku 東西所属
+	 * @param chokyoshi 調教師
+	 * @param banushi 馬主
+	 * @param fukushokuHyoji 勝負服の表示色
+	 * @param futanJuryo 斤量
+	 * @param blinkerShiyoKubun ブリンカー使用区分
+	 * @param kishumei 騎手名
+	 * @param kishumeiRyakusho 騎手名略称
+	 * @param kishuMinarai 騎手見習い表示
+	 * @param bataiju 馬体重
+	 * @param zogensa 増減差
+	 * @param ijoKubun 異常区分
+	 * @param nyusenJuni 入選順位
+	 * @param kakuteiChakujun 確定着順
+	 * @param sohaTime 走破タイム
+	 * @param corner1Juni コーナー1順位
+	 * @param corner2Juni コーナー2順位
+	 * @param corner3Juni コーナー3順位
+	 * @param corner4Juni コーナー4順位
+	 * @param tanshoOdds 単勝オッズ
+	 * @param tanshoNinkijun 単勝人気順
+	 * @param kohan4f 後半4fタイム
+	 * @param kohan3f 後半3fタイム
+	 * @param timeSa タイム差
+	 * @param yobi 曜日
+	 * @param grade 競走グレード
+	 * @param kyosoShubetsu 競争種別
+	 * @param kyosoKigo 競争記号
+	 * @param juryoShubetsu 重量種別
+	 * @param kyosoJoken 競争条件
+	 * @param trackCode トラックコード
+	 * @param tenko 天候
+	 * @param shibaBabaJotai 芝馬場状態
+	 * @param dirtBabaJotai ダート馬場状態
+	 * @param kyosomeiHondai 競争名本題
+	 * @param kyosomeiRyakusho10 競争名略称10文字
+	 * @param kyosomeiRyakusho6 競争名略称6文字
+	 * @param kyosomeiKubun 競争名区分
+	 * @param jushoKaiji 重賞回次
+	 * @param kyori 距離
+	 * @param hassoJikoku 発送時刻
+	 * @param srun Srun
+	 * @param aiteBamei1 相手馬名1
+	 * @param aiteBamei2 相手馬名2
+	 * @param father 父
+	 * @param mother 母
+	 * @param grandFather 母父
+	 * @param torokuTosu 登録頭数
+	 * @param shussoTosu 出走頭数
+	 * @param umaID　前走を１としたレース指定ID
+	 * @param srunCount Srunの有効個数
 	 */
 	public UmagotoDataSet(int umaGroup, String dataKubun, String raceCode, String kaisaiNenGappi, String bamei,
 			String keibajo, int kaisaiKaiji, int kaisaiNichiji, int raceBango, int wakuban, int umaban,
@@ -755,30 +765,58 @@ public class UmagotoDataSet implements Serializable {
 				+ "]";
 	}
 
+	/**
+	 * 相手馬名1を返します
+	 * @return 相手馬名1
+	 */
 	public String getAiteBamei1() {
 		return aiteBamei1;
 	}
 
+	/**
+	 * 相手馬名2を返します
+	 * @return 相手馬名2
+	 */
 	public String getAiteBamei2() {
 		return aiteBamei2;
 	}
 
+	/**
+	 * 父の馬名を返します
+	 * @return 父
+	 */
 	public String getFather() {
 		return father;
 	}
 
+	/**
+	 * 母の馬名を返します
+	 * @return 母
+	 */
 	public String getMother() {
 		return mother;
 	}
 
+	/**
+	 * 母父の馬名を返します
+	 * @return 母父
+	 */
 	public String getGrandfather() {
 		return grandfather;
 	}
 
+	/**
+	 * 登録頭数を返します
+	 * @return 登録頭数
+	 */
 	public int getTorokuTosu() {
 		return torokuTosu;
 	}
 
+	/**
+	 * 出走頭数を返します
+	 * @return 出走頭数
+	 */
 	public int getShussoTosu() {
 		return shussoTosu;
 	}

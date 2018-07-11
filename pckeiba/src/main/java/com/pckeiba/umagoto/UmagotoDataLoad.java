@@ -12,7 +12,8 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 /**
- * レースコードからList<UmagotoDataSet>を取得するクラス
+ * データベースから出馬表の詳細データを取り出します<br>
+ * 引数にレースコードを指定してください
  * @author KentaroYoshida
  *
  */
@@ -21,8 +22,10 @@ public class UmagotoDataLoad {
 	private final List<UmagotoDataSet> list;
 
 	/**
-	 * コンストラクタ 引数はレースコードです。List<UmagotoDataSet>を生成します。
-	 * @param raceCode
+	 * コンストラクタ<br>
+	 * データベースから出馬表の詳細データを取得します
+	 * @param raceCode レースコード
+	 * @param hit 過去レース数
 	 */
 	public UmagotoDataLoad(String raceCode, int hit) {
 		list = new ArrayList<>();
@@ -55,13 +58,18 @@ public class UmagotoDataLoad {
 	}
 
 	/**
-	 * <UmagotoDataSet>をListで返します。
-	 * @return List<UmagotoDataSet>
+	 * 出馬表の詳細データのオブジェクトを返します
+	 * @return 出馬表の詳細データのオブジェクト
 	 */
 	public List<UmagotoDataSet> getList() {
 		return list;
 	}
 
+	/**
+	 * 馬番と紐づいた出馬表の詳細データのオブジェクトを返します
+	 * @param UmaID レース指定ID（前走を1とします）
+	 * @return 出馬表の詳細データのオブジェクト
+	 */
 	public Map<Integer,UmagotoDataSet> getMap(int UmaID){
 		Map<Integer,UmagotoDataSet> map = new HashMap<>();
 		List<UmagotoDataSet> l = list.stream().filter(s -> s.getUmaID()==UmaID).collect(Collectors.toList());
@@ -71,6 +79,11 @@ public class UmagotoDataLoad {
 		return map;
 	}
 
+	/**
+	 * 血統登録番号と紐づいた出馬表の詳細データのオブジェクトを返します
+	 * @param UmaID レース指定ID（前走を1とします）
+	 * @return 出馬表の詳細データのオブジェクト
+	 */
 	public Map<String,UmagotoDataSet> getMapFromKettoTorokuBango(int UmaID){
 		Map<String,UmagotoDataSet> map = new HashMap<>();
 		List<UmagotoDataSet> l = list.stream().filter(s -> s.getUmaID()==UmaID).collect(Collectors.toList());
