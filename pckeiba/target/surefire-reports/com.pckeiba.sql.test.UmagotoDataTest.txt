@@ -1,4 +1,4 @@
 -------------------------------------------------------------------------------
-Test set: com.pckeiba.sql.test.DrunGetTest
+Test set: com.pckeiba.sql.test.UmagotoDataTest
 -------------------------------------------------------------------------------
 Tests run: 0, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0 sec

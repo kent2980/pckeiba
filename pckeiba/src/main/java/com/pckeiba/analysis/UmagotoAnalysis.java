@@ -1,16 +1,20 @@
 package com.pckeiba.analysis;
 
+import java.time.Duration;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.stream.Collectors;
 
 import com.pckeiba.umagoto.UmagotoDataLoad;
 
 /**
- * 距離適性の分析を行うクラス
+ * 馬毎データから様々な分析を行うクラス
  * @author kent2
  *
  */
-public class DistanceAnalysis {
+public class UmagotoAnalysis {
 	private UmagotoDataLoad umagotoData;
 
 	/**
@@ -18,7 +22,7 @@ public class DistanceAnalysis {
 	 * 初期化を行います
 	 * @param umagotoData 馬毎データ
 	 */
-	public DistanceAnalysis(UmagotoDataLoad umagotoData) {
+	public UmagotoAnalysis(UmagotoDataLoad umagotoData) {
 		//各UmagotoDataの初期化を行う
 		this.umagotoData = umagotoData;
 	}
@@ -29,7 +33,7 @@ public class DistanceAnalysis {
 	 * @param umaban 馬番
 	 * @return 距離適性の評価印
 	 */
-	public String getAnalisis(int umaban) {
+	public String getDistanceAnalisis(int umaban) {
 		//指定された馬番の距離をリストに纏めます
 		List<Integer> DistanceList = umagotoData.getList().stream()
 														  .filter(s -> s.getUmaGroup() == umaban)
@@ -66,5 +70,34 @@ public class DistanceAnalysis {
 			break;
 		}
 		return evaluation;
+	}
+
+	/**
+	 * 前走からのレース間隔を返します<br>
+	 * 引数に馬番を指定してください
+	 * @param umaban 馬番
+	 * @return レース間隔（週）
+	 */
+	public String getRaceInterval(int umaban) {
+		//指定された馬番の距離をリストに纏めます
+		List<String> dateList = umagotoData.getList().stream()
+														  .filter(s -> s.getUmaGroup() == umaban)
+														  .map(s -> s.getKaisaiNenGappi())
+														  .collect(Collectors.toList());
+
+		try {
+			//LocalDateに変換します
+			LocalDateTime nowRace = LocalDate.parse(dateList.get(0), DateTimeFormatter.ofPattern("yyyy年MM月dd日")).atStartOfDay();	//今走の開催年月日
+			LocalDateTime beforRace = LocalDate.parse(dateList.get(1), DateTimeFormatter.ofPattern("yyyy年MM月dd日")).atStartOfDay();	//前走の開催年月日
+
+			//レース間隔を計算します
+			Duration duration = Duration.between(beforRace, nowRace);
+			long count = duration.toDays() / 7;
+			String countWeek = "中" + String.format("%02d", count) + "週";
+
+			return countWeek;
+		}catch(IndexOutOfBoundsException e) {
+			return "-";
+		}
 	}
 }

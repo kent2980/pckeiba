@@ -286,7 +286,10 @@ public class UmagotoDataSet implements Serializable {
 	}
 
 	/**
-	 * 開催年月日を返します。
+	 * 開催年月日を返します。<br>
+	 * 【活用例】<br>
+	 * 1.LocalDateへの変換例<br>
+	 * LocalDate date = LocalDate.parse(day, DateTimeFormatter.ofPattern("yyyy年MM月dd日"));
 	 * @return 開催年月日 Not Null
 	 */
 	public String getKaisaiNenGappi() {
