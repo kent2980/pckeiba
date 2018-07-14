@@ -93,7 +93,9 @@ public class UmagotoAnalysis {
 			//レース間隔を計算します
 			Duration duration = Duration.between(beforRace, nowRace);
 			long count = duration.toDays() / 7;
-			String countWeek = "中" + String.format("%02d", count) + "週";
+
+			//countが1の場合は"連闘"を返す
+			String countWeek = count <= 1 ? "連闘" : "中" + String.format("%02d", count) + "週";
 
 			return countWeek;
 		}catch(IndexOutOfBoundsException e) {

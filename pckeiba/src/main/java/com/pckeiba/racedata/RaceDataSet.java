@@ -2,6 +2,7 @@ package com.pckeiba.racedata;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.Comparator;
 
 import com.util.DateTimeFormat;
 import com.util.TrackCodeFormat;
@@ -21,7 +22,7 @@ import com.util.TrackCodeFormat;
  * @author kent2
  *
  */
-public class RaceDataSet implements Serializable{
+public class RaceDataSet implements Serializable,Comparable<RaceDataSet>{
 	private static final long serialVersionUID = 1L;
 	private String dataKubun;
 	private String raceCode;
@@ -503,6 +504,19 @@ public class RaceDataSet implements Serializable{
 	 */
 	public String[] getKakuTsukaJuni() {
 		return kakuTsukaJuni;
+	}
+
+	/**
+	 * 引数のインスタンスと比較を行います
+	 */
+	@Override
+	public int compareTo(RaceDataSet o) {
+		if(this.raceBango > o.raceBango)
+			return 1;
+		if(this.raceBango < o.raceBango)
+			return -1;
+
+		return 0;
 	}
 
 }
