@@ -513,6 +513,23 @@ public class UmagotoDataSet implements Serializable {
 	}
 
 	/**
+	 * 走破タイムの文字列を返します。<br>走破タイムは分:秒.コンマ秒表示です。
+	 * @return 走破タイム
+	 */
+	public String getSohaTimeValue() {
+		//分を計算します
+		BigDecimal minute = sohaTime.divide(BigDecimal.valueOf(60), 0, BigDecimal.ROUND_DOWN);
+		//秒を計算します
+		BigDecimal second = sohaTime.subtract(minute.multiply(BigDecimal.valueOf(60))).setScale(0, BigDecimal.ROUND_DOWN);
+		//コンマ秒を計算します
+		BigDecimal comma = sohaTime.subtract(minute.multiply(BigDecimal.valueOf(60))).subtract(second);
+		//文字列の整形を行います
+		String value = minute + ":" + String.format("%02d", second.intValue()) + "." + comma.multiply(BigDecimal.TEN).setScale(0);
+
+		return value;
+	}
+
+	/**
 	 * 1コーナーでの順位を返します。
 	 * @return 順位
 	 */
