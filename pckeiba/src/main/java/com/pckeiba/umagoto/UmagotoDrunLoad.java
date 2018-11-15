@@ -77,9 +77,10 @@ public class UmagotoDrunLoad implements Serializable{
 
 			pstmt.setString(1, raceCode);
 			ResultSet rs = pstmt.executeQuery();
+			int t = 18; //Drun_Outテーブルの列数を指定します
 			while(rs.next()) {
-				drunList.put(rs.getString(7),new UmagotoDrunSet(rs.getString(1), rs.getString(2), rs.getString(3), rs.getInt(4), rs.getInt(5), rs.getString(6), rs.getString(7), rs.getDouble(8),rs.getBigDecimal(14),rs.getInt(15), rs.getInt(13), rs.getDouble(16)));
-				drunMap.put(rs.getString(7), rs.getBigDecimal(14));
+				drunList.put(rs.getString(7),new UmagotoDrunSet(rs.getString(1), rs.getString(2), rs.getString(3), rs.getInt(4), rs.getInt(5), rs.getString(6), rs.getString(7), rs.getDouble(8),rs.getBigDecimal(t-2),rs.getInt(t-1), rs.getInt(13), rs.getDouble(t), rs.getInt(14), rs.getInt(15)));
+				drunMap.put(rs.getString(7), rs.getBigDecimal(t-2));
 			}
 
 

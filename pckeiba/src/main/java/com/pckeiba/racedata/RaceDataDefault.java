@@ -1,26 +1,12 @@
 package com.pckeiba.racedata;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 
 import com.util.DateTimeFormat;
 import com.util.TrackCodeFormat;
 
-/*************************************************************************************************************
- *************************************************************************************************************
- * !! データベースから取り出すデータに変更があった場合は、必ずこのクラスにも変更を反映してください。
- * !! 変更が反映されていない場合、正しいデータの取得することが出来ません
- *************************************************************************************************************
- *************************************************************************************************************/
-
-/**
- * レースの詳細データを表すオブジェクト<br>
- * 各データについてはJRA-VAN DataLab ドキュメントを参照してください<br>
- * 参照URL：<a reef="https://jra-van.jp/dlb/sdv/sdk.html">https://jra-van.jp/dlb/sdv/sdk.html</a><br>
- * このクラスから生成したインスタンスは直列化されます
- * @author kent2
- *
- */
-public class RaceDataSet extends RaceDataDefault{
+public class RaceDataDefault implements Serializable,Comparable<RaceDataSet>{
 	private static final long serialVersionUID = 1L;
 	private String dataKubun;
 	private String raceCode;
@@ -65,16 +51,12 @@ public class RaceDataSet extends RaceDataDefault{
 	private String[] kakuTsukaJuni;
 	private String baba;
 	private int keibajoCode;
-	private BigDecimal RPCI;
-	private BigDecimal ave3f;
-	private BigDecimal srunRow;
-	private BigDecimal srun55;
 
 	/**
 	 * コンストラクタ<br>
 	 * nullなオブジェクトを生成します
 	 */
-	public RaceDataSet() {}
+	public RaceDataDefault() {}
 
 	/**
 	 * コンストラクタ<br>
@@ -121,19 +103,15 @@ public class RaceDataSet extends RaceDataDefault{
 	 * @param shukaisu4 周回数4
 	 * @param kakuTsukaJuni 角通過順位
 	 * @param keibajoCode 競馬場コード
-	 * @param RPCI レースのRPCI
-	 * @param ave3f レースの平均3Fタイム
-	 * @param srunRow SRUNの生データです
-	 * @param srun55 斤量55kgにおけるSRUNデータです
 	 */
-	public RaceDataSet(String dataKubun, String raceCode, String kaisaiNenGappi, int kaisaiKaiji, int kaisaiNichiji,
+	public RaceDataDefault(String dataKubun, String raceCode, String kaisaiNenGappi, int kaisaiKaiji, int kaisaiNichiji,
 			int raceBango, String keibajo, String yobi, int JushoKaiji, String kyosomeiHondai, String kyosomeiFukudai, String kyosomeiRyaku10,
 			int kyosomeiKubun, String grade, String kyosoShubetsu, String kyosoKigo, String juryoShubetsu,
 			String kyosoJoken, int kyori, String trackCode, String hassoJikoku, int torokuTosu, int shussoTosu,
 			int nyusenTosu, String tenko, String shibaJotai, String dirtJotai, BigDecimal[] lapTime,
 			BigDecimal zenhan3f, BigDecimal zenhan4f, BigDecimal kohan3f, BigDecimal kohan4f, int coner1, int coner2,
 			int coner3, int coner4, int shukaisu1, int shukaisu2, int shukaisu3, int shukaisu4,
-			String[] kakuTsukaJuni, int keibajoCode ,BigDecimal RPCI, BigDecimal ave3f, BigDecimal srunRow, BigDecimal srun55) {
+			String[] kakuTsukaJuni, int keibajoCode) {
 		this.dataKubun = dataKubun;
 		this.raceCode = raceCode;
 		this.kaisaiNenGappi = DateTimeFormat.dateFormat(kaisaiNenGappi,1);
@@ -177,10 +155,6 @@ public class RaceDataSet extends RaceDataDefault{
 		this.kakuTsukaJuni = kakuTsukaJuni;
 		this.baba = TrackCodeFormat.getBaba(trackCode);
 		this.keibajoCode = keibajoCode;
-		this.RPCI = RPCI;
-		this.ave3f = ave3f;
-		this.srunRow = srunRow;
-		this.srun55 = srun55;
 	}
 
 	/**
@@ -524,9 +498,9 @@ public class RaceDataSet extends RaceDataDefault{
 	 */
 	@Override
 	public int compareTo(RaceDataSet o) {
-		if(this.raceBango > o.raceBango)
+		if(this.raceBango > o.getRaceBango())
 			return 1;
-		if(this.raceBango < o.raceBango)
+		if(this.raceBango < o.getRaceBango())
 			return -1;
 
 		return 0;
@@ -538,42 +512,6 @@ public class RaceDataSet extends RaceDataDefault{
 	 */
 	public int getKeibajoCode() {
 		return keibajoCode;
-	}
-
-	/**
-	 * レースのRPCIを返します
-	 * @return RPCI
-	 */
-	public BigDecimal getRPCI() {
-		return RPCI;
-	}
-
-	/**
-	 * レースの平均3Fタイムを返します
-	 * @return 平均3Fタイム
-	 */
-	public BigDecimal getAve3f() {
-		return ave3f;
-	}
-
-	public static long getSerialversionuid() {
-		return serialVersionUID;
-	}
-
-	/**
-	 * レースのSRUN生データを返します
-	 * @return SRUN
-	 */
-	public BigDecimal getSrunRow() {
-		return srunRow;
-	}
-
-	/**
-	 * 斤量55kgにおけるレースのSRUNデータを返します
-	 * @return SRUN
-	 */
-	public BigDecimal getSrun55() {
-		return srun55;
 	}
 
 }

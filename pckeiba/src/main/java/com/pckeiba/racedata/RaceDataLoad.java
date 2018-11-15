@@ -60,7 +60,8 @@ public class RaceDataLoad {
 					rs.getString(18),rs.getInt(19),rs.getString(20),rs.getString(21),rs.getInt(22),rs.getInt(23),
 					rs.getInt(24),rs.getString(25),rs.getString(26),rs.getString(27),lapTime.toArray(new BigDecimal[lapTime.size()]),rs.getBigDecimal(53),
 					rs.getBigDecimal(54),rs.getBigDecimal(55),rs.getBigDecimal(56),rs.getInt(57),rs.getInt(58),rs.getInt(59),
-					rs.getInt(60),rs.getInt(61),rs.getInt(62),rs.getInt(63),rs.getInt(64),kakuTsukaJuni.toArray(new String[kakuTsukaJuni.size()]));
+					rs.getInt(60),rs.getInt(61),rs.getInt(62),rs.getInt(63),rs.getInt(64),kakuTsukaJuni.toArray(new String[kakuTsukaJuni.size()]), rs.getInt(69),
+					rs.getBigDecimal(70), rs.getBigDecimal(71), rs.getBigDecimal(72), rs.getBigDecimal(73));
 		}catch(SQLException e) {
 			System.out.println("データベースへの接続が確立できませんでした");
 			System.out.println(e.getMessage());

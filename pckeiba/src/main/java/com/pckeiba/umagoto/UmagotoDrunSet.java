@@ -27,6 +27,8 @@ public class UmagotoDrunSet implements Serializable{
 	private final int drunRunk;
 	private final int kakuteiChakujun;
 	private final double bunsan;
+	private final int barei;
+	private final int kyori;
 
 	/**
 	 *
@@ -42,9 +44,11 @@ public class UmagotoDrunSet implements Serializable{
 	 * @param drunRunk Drun順位
 	 * @param kakuteiChakujun 確定着順
 	 * @param bunsan Srunの分散値
+	 * @param barei 馬齢
+	 * @param kyori 距離
 	 */
 	public UmagotoDrunSet(String kaisaiNenGappi, String raceCode, String kyosomei, int wakuban, int umaban,
-			String bamei, String kettoTorokuBango, double futanJuryo,  BigDecimal drun, int drunRunk, int kakuteiChakujun, double bunsan) {
+			String bamei, String kettoTorokuBango, double futanJuryo,  BigDecimal drun, int drunRunk, int kakuteiChakujun, double bunsan, int barei, int kyori) {
 		super();
 		this.kaisaiNenGappi = kaisaiNenGappi;
 		this.raceCode = raceCode;
@@ -58,6 +62,8 @@ public class UmagotoDrunSet implements Serializable{
 		this.drunRunk = drunRunk;
 		this.kakuteiChakujun = kakuteiChakujun;
 		this.bunsan = bunsan;
+		this.barei = barei;
+		this.kyori = kyori;
 	}
 
 	/**
@@ -162,6 +168,22 @@ public class UmagotoDrunSet implements Serializable{
 	 */
 	public double getBunsan() {
 		return bunsan;
+	}
+
+	/**
+	 * 馬齢を返します
+	 * @return 馬齢
+	 */
+	public int getBarei() {
+		return barei;
+	}
+
+	/**
+	 * 距離を返します
+	 * @return 距離
+	 */
+	public int getKyori() {
+		return kyori;
 	}
 
 }

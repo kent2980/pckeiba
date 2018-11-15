@@ -92,6 +92,16 @@ public class UmagotoDataSet implements Serializable {
 	private final String baba;
 	private final int torokuTosu;
 	private final int shussoTosu;
+	private final BigDecimal raceZenhan3f;
+	private final BigDecimal raceZenhan4f;
+	private final BigDecimal raceKohan3f;
+	private final BigDecimal raceKohan4f;
+	private final BigDecimal RPCI;
+	private final BigDecimal fPCI;
+	private final String kyakushitsu;
+	private final BigDecimal ave3f;
+	private final BigDecimal raceSrun;
+	private final BigDecimal srun55;
 
 	/**
 	 * コンストラクタ finalなプロパティを設定します。
@@ -162,6 +172,16 @@ public class UmagotoDataSet implements Serializable {
 	 * @param shussoTosu 出走頭数
 	 * @param umaID　前走を１としたレース指定ID
 	 * @param srunCount Srunの有効個数
+	 * @param raceZenhan3f レースの前半3fタイム
+	 * @param raceZenhan4f レースの前半4fタイム
+	 * @param raceKohan3f レースの後半3fタイム
+	 * @param raceKohan4f レースの後半4fタイム
+	 * @param RPCI レースのペースチェンジ指数
+	 * @param fPCI 馬毎の上がり3Fの標準偏差
+	 * @param kyakushitsu 脚質
+	 * @param ave3f 平均3F
+	 * @param raceSrun レースのSRUN
+	 * @param srun55 斤量55kgにおけるSRUN
 	 */
 	public UmagotoDataSet(int umaGroup, String dataKubun, String raceCode, String kaisaiNenGappi, String bamei,
 			String keibajo, int kaisaiKaiji, int kaisaiNichiji, int raceBango, int wakuban, int umaban,
@@ -174,7 +194,9 @@ public class UmagotoDataSet implements Serializable {
 			String kyosoJoken, String trackCode, String tenko, String shibaBabaJotai, String dirtBabaJotai,
 			String kyosomeiHondai, String kyosomeiRyakusho10, String kyosomeiRyakusho6, int kyosomeiKubun,
 			int jushoKaiji, int kyori, String hassoJikoku, BigDecimal srun,  String aiteBamei1, String aiteBamei2,
-			String father, String mother, String grandFather, int torokuTosu, int shussoTosu, int umaID, int srunCount) {
+			String father, String mother, String grandFather, int torokuTosu, int shussoTosu, int umaID, int srunCount,
+			BigDecimal raceZenhan3f, BigDecimal raceZenhan4f, BigDecimal raceKohan3f, BigDecimal raceKohan4f, BigDecimal RPCI,
+			BigDecimal fPCI, String kyakushitsu, BigDecimal ave3f, BigDecimal raceSrun, BigDecimal srun55) {
 		this.UmaGroup = umaGroup;
 		this.DataKubun = dataKubun;
 		this.raceCode = raceCode;
@@ -243,6 +265,16 @@ public class UmagotoDataSet implements Serializable {
 		this.baba = TrackCodeFormat.getBaba(trackCode);
 		this.torokuTosu = torokuTosu;
 		this.shussoTosu = shussoTosu;
+		this.raceZenhan3f = raceZenhan3f;
+		this.raceZenhan4f = raceZenhan4f;
+		this.raceKohan3f = raceKohan3f;
+		this.raceKohan4f = raceKohan4f;
+		this.RPCI = RPCI;
+		this.fPCI = fPCI;
+		this.kyakushitsu = kyakushitsu;
+		this.ave3f = ave3f;
+		this.raceSrun = raceSrun;
+		this.srun55 = srun55;
 	}
 
 	/**
@@ -840,4 +872,86 @@ public class UmagotoDataSet implements Serializable {
 	public int getShussoTosu() {
 		return shussoTosu;
 	}
+
+	/**
+	 * レースの前半3Fの走破タイムを返します。
+	 * @return 前半3F
+	 */
+	public BigDecimal getRaceZenhan3f() {
+		return raceZenhan3f;
+	}
+
+	/**
+	 * レースの前半4Fの走破タイムを返します。
+	 * @return 前半4F
+	 */
+	public BigDecimal getRaceZenhan4f() {
+		return raceZenhan4f;
+	}
+
+	/**
+	 * レースの後半3Fの走破タイムを返します。
+	 * @return 後半3F
+	 */
+	public BigDecimal getRaceKohan3f() {
+		return raceKohan3f;
+	}
+
+
+	/**
+	 * レースの後半4Fの走破タイムを返します。
+	 * @return 後半4F
+	 */
+	public BigDecimal getRaceKohan4f() {
+		return raceKohan4f;
+	}
+
+	/**
+	 * レースのRPCI(ペースチェンジ指数）を返します。
+	 * @return RPCI
+	 */
+	public BigDecimal getRPCI() {
+		return RPCI;
+	}
+
+	/**
+	 * 馬毎の上がり3Fの標準偏差を返します。
+	 * @return 上がり3Fの標準偏差
+	 */
+	public BigDecimal getfPCI() {
+		return fPCI;
+	}
+
+	/**
+	 * 馬毎の脚質を返します。
+	 * @return 脚質
+	 */
+	public String getKyakushitsu() {
+		return kyakushitsu;
+	}
+
+	/**
+	 * 馬毎の平均3Fタイムを返します。
+	 * @return 平均3Fタイム
+	 */
+	public BigDecimal getAve3f() {
+		return ave3f;
+	}
+
+	/**
+	 * レースのSRUNを返します
+	 * @return レースのSRUN
+	 */
+	public BigDecimal getRaceSrun() {
+		return raceSrun;
+	}
+
+	/**
+	 * 馬毎の斤量55kgにおけるSRUNを返します
+	 * @return SRUN
+	 */
+	public BigDecimal getSrun55() {
+		return srun55;
+	}
+
 }

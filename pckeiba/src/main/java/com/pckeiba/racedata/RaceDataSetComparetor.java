@@ -7,13 +7,13 @@ import java.util.Comparator;
  * @author kent2
  *
  */
-public class RaceDataSetComparetor implements Comparator<RaceDataSet> {
+public class RaceDataSetComparetor implements Comparator<RaceDataDefault> {
 
 	/**
 	 * 引数に指定した2つのオブジェクトの比較を行います
 	 */
 	@Override
-	public int compare(RaceDataSet o1, RaceDataSet o2) {
+	public int compare(RaceDataDefault o1, RaceDataDefault o2) {
 		if(o1.getRaceBango() > o2.getRaceBango())
 			return 1;
 		if(o1.getRaceBango() < o2.getRaceBango())
