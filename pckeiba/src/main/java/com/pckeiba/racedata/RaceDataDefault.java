@@ -7,56 +7,59 @@ import com.util.DateTimeFormat;
 import com.util.TrackCodeFormat;
 
 public class RaceDataDefault implements Serializable,Comparable<RaceDataSet>{
+	/**
+	 *
+	 */
+	public RaceDataDefault() {
+		// TODO 自動生成されたコンストラクター・スタブ
+	}
+
 	private static final long serialVersionUID = 1L;
-	private String dataKubun;
-	private String raceCode;
-	private String kaisaiNenGappi;
-	private int kaisaiKaiji;
-	private int kaisaiNichiji;
-	private int raceBango;
-	private String keibajo;
-	private String yobi;
-	private int JushoKaiji;
-	private String kyosomeiHondai;
-	private String kyosomeiFukudai;
-	private String kyosomeiRyaku10;
-	private int kyosomeiKubun;
-	private String grade;
-	private String kyosoShubetsu;
-	private String kyosoKigo;
-	private String juryoShubetsu;
-	private String kyosoJoken;
-	private int kyori;
-	private String trackCode;
-	private String hassoJikoku;
-	private int torokuTosu;
-	private int shussoTosu;
-	private int nyusenTosu;
-	private String tenko;
-	private String shibaJotai;
-	private String dirtJotai;
-	private BigDecimal[] lapTime;
-	private BigDecimal zenhan3f;
-	private BigDecimal zenhan4f;
-	private BigDecimal kohan3f;
-	private BigDecimal kohan4f;
+	private String baba;
 	private int coner1;
 	private int coner2;
 	private int coner3;
 	private int coner4;
+	private String dataKubun;
+	private String dirtJotai;
+	private String grade;
+	private String hassoJikoku;
+	private String juryoShubetsu;
+	private int JushoKaiji;
+	private int kaisaiKaiji;
+	private String kaisaiNenGappi;
+	private int kaisaiNichiji;
+	private String[] kakuTsukaJuni;
+	private String keibajo;
+	private int keibajoCode;
+	private BigDecimal kohan3f;
+	private BigDecimal kohan4f;
+	private int kyori;
+	private String kyosoJoken;
+	private String kyosoKigo;
+	private String kyosomei;
+	private String kyosomeiFukudai;
+	private String kyosomeiHondai;
+	private int kyosomeiKubun;
+	private String kyosomeiRyaku10;
+	private String kyosoShubetsu;
+	private BigDecimal[] lapTime;
+	private int nyusenTosu;
+	private int raceBango;
+	private String raceCode;
+	private String shibaJotai;
 	private int shukaisu1;
 	private int shukaisu2;
 	private int shukaisu3;
 	private int shukaisu4;
-	private String[] kakuTsukaJuni;
-	private String baba;
-	private int keibajoCode;
+	private int shussoTosu;
+	private String tenko;
+	private int torokuTosu;
+	private String trackCode;
+	private String yobi;
+	private BigDecimal zenhan3f;
+	private BigDecimal zenhan4f;
 
-	/**
-	 * コンストラクタ<br>
-	 * nullなオブジェクトを生成します
-	 */
-	public RaceDataDefault() {}
 
 	/**
 	 * コンストラクタ<br>
@@ -155,6 +158,20 @@ public class RaceDataDefault implements Serializable,Comparable<RaceDataSet>{
 		this.kakuTsukaJuni = kakuTsukaJuni;
 		this.baba = TrackCodeFormat.getBaba(trackCode);
 		this.keibajoCode = keibajoCode;
+		setKyosomei();
+	}
+
+	/**
+	 * 引数のインスタンスと比較を行います
+	 */
+	@Override
+	public int compareTo(RaceDataSet o) {
+		if(this.raceBango > o.getRaceBango())
+			return 1;
+		if(this.raceBango < o.getRaceBango())
+			return -1;
+
+		return 0;
 	}
 
 	/**
@@ -163,262 +180,6 @@ public class RaceDataDefault implements Serializable,Comparable<RaceDataSet>{
 	 */
 	public String getBaba() {
 		return baba;
-	}
-
-	/**
-	 * データ区分を返します
-	 * @return データ区分
-	 */
-	public String getDataKubun() {
-		return dataKubun;
-	}
-
-	/**
-	 * レースコードを返します
-	 * @return レースコード
-	 */
-	public String getRaceCode() {
-		return raceCode;
-	}
-
-	/**
-	 * 開催年月日を返します
-	 * @return 開催年月日
-	 */
-	public String getKaisaiNenGappi() {
-		return kaisaiNenGappi;
-	}
-
-	/**
-	 * 開催回次を返します
-	 * @return　開催回次
-	 */
-	public int getKaisaiKaiji() {
-		return kaisaiKaiji;
-	}
-
-	/**
-	 * 開催日次を返します
-	 * @return 開催日次
-	 */
-	public int getKaisaiNichiji() {
-		return kaisaiNichiji;
-	}
-
-	/**
-	 * レース番号を返します
-	 * @return レース番号
-	 */
-	public int getRaceBango() {
-		return raceBango;
-	}
-
-	/**
-	 * 競馬場名を返します
-	 * @return 競馬場
-	 */
-	public String getKeibajo() {
-		return keibajo;
-	}
-
-	/**
-	 * 重賞回次を返します
-	 * @return 重賞回次
-	 */
-	public int getJushoKaiji() {
-		return JushoKaiji;
-	}
-
-	/**
-	 * 開催曜日を返します
-	 * @return 曜日
-	 */
-	public String getYobi() {
-		return yobi;
-	}
-
-	/**
-	 * 競争名本題を返します
-	 * @return 競争名本題
-	 */
-	public String getKyosomeiHondai() {
-		return kyosomeiHondai;
-	}
-
-	/**
-	 * 競争名副題を返します
-	 * @return 競争名副題
-	 */
-	public String getKyosomeiFukudai() {
-		return kyosomeiFukudai;
-	}
-
-	/**
-	 * 競争名略称10文字を返します
-	 * @return 競争名略称10文字
-	 */
-	public String getKyosomeiRyaku10() {
-		return kyosomeiRyaku10;
-	}
-
-	/**
-	 * 競争名区分を返します
-	 * @return 競争名区分
-	 */
-	public int getKyosomeiKubun() {
-		return kyosomeiKubun;
-	}
-
-	/**
-	 * 競走グレードを返します
-	 * @return グレード
-	 */
-	public String getGrade() {
-		return grade;
-	}
-
-	/**
-	 * 競争種別を返します
-	 * @return 競争種別
-	 */
-	public String getKyosoShubetsu() {
-		return kyosoShubetsu;
-	}
-
-	/**
-	 * 競争記号を返します
-	 * @return 競争記号
-	 */
-	public String getKyosoKigo() {
-		return kyosoKigo;
-	}
-
-	/**
-	 * 重量種別を返します
-	 * @return 重量種別
-	 */
-	public String getJuryoShubetsu() {
-		return juryoShubetsu;
-	}
-
-	/**
-	 * 競争条件を返します
-	 * @return 競争条件
-	 */
-	public String getKyosoJoken() {
-		return kyosoJoken;
-	}
-
-	/**
-	 * 施工されるレース距離を返します
-	 * @return 距離
-	 */
-	public int getKyori() {
-		return kyori;
-	}
-
-	/**
-	 * トラックコードを返します
-	 * @return トラックコード
-	 */
-	public String getTrackCode() {
-		return trackCode;
-	}
-
-	/**
-	 * 発送時刻を返します
-	 * @return 発送時刻
-	 */
-	public String getHassoJikoku() {
-		return hassoJikoku;
-	}
-
-	/**
-	 * 登録頭数を返します
-	 * @return 登録頭数
-	 */
-	public int getTorokuTosu() {
-		return torokuTosu;
-	}
-
-	/**
-	 * 出走頭数を返します
-	 * @return 出走頭数
-	 */
-	public int getShussoTosu() {
-		return shussoTosu;
-	}
-
-	/**
-	 * 入選頭数を返します
-	 * @return 入選頭数
-	 */
-	public int getNyusenTosu() {
-		return nyusenTosu;
-	}
-
-	/**
-	 * 天候を返します
-	 * @return 天候
-	 */
-	public String getTenko() {
-		return tenko;
-	}
-
-	/**
-	 * 芝馬場状態を返します
-	 * @return 芝馬場状態
-	 */
-	public String getShibaJotai() {
-		return shibaJotai;
-	}
-
-	/**
-	 * ダート馬場状態を返します
-	 * @return ダート馬場状態
-	 */
-	public String getDirtJotai() {
-		return dirtJotai;
-	}
-
-	/**
-	 * ラップタイムを配列で返します
-	 * @return ラップタイム
-	 */
-	public BigDecimal[] getLapTime() {
-		return lapTime;
-	}
-
-	/**
-	 * 前半3fタイムを返します
-	 * @return 前半3fタイム
-	 */
-	public BigDecimal getZenhan3f() {
-		return zenhan3f;
-	}
-
-	/**
-	 * 前半4fタイムを返します
-	 * @return 前半4fタイム
-	 */
-	public BigDecimal getZenhan4f() {
-		return zenhan4f;
-	}
-
-	/**
-	 * 後半3fタイムを返します
-	 * @return 後半3fタイム
-	 */
-	public BigDecimal getKohan3f() {
-		return kohan3f;
-	}
-
-	/**
-	 * 後半4fタイムを返します
-	 * @return 後半4fタイム
-	 */
-	public BigDecimal getKohan4f() {
-		return kohan4f;
 	}
 
 	/**
@@ -454,6 +215,222 @@ public class RaceDataDefault implements Serializable,Comparable<RaceDataSet>{
 	}
 
 	/**
+	 * データ区分を返します
+	 * @return データ区分
+	 */
+	public String getDataKubun() {
+		return dataKubun;
+	}
+
+	/**
+	 * ダート馬場状態を返します
+	 * @return ダート馬場状態
+	 */
+	public String getDirtJotai() {
+		return dirtJotai;
+	}
+
+	/**
+	 * 競走グレードを返します
+	 * @return グレード
+	 */
+	public String getGrade() {
+		return grade;
+	}
+
+	/**
+	 * 発送時刻を返します
+	 * @return 発送時刻
+	 */
+	public String getHassoJikoku() {
+		return hassoJikoku;
+	}
+
+	/**
+	 * 重量種別を返します
+	 * @return 重量種別
+	 */
+	public String getJuryoShubetsu() {
+		return juryoShubetsu;
+	}
+
+	/**
+	 * 重賞回次を返します
+	 * @return 重賞回次
+	 */
+	public int getJushoKaiji() {
+		return JushoKaiji;
+	}
+
+	/**
+	 * 開催回次を返します
+	 * @return　開催回次
+	 */
+	public int getKaisaiKaiji() {
+		return kaisaiKaiji;
+	}
+
+	/**
+	 * 開催年月日を返します
+	 * @return 開催年月日
+	 */
+	public String getKaisaiNenGappi() {
+		return kaisaiNenGappi;
+	}
+
+	/**
+	 * 開催日次を返します
+	 * @return 開催日次
+	 */
+	public int getKaisaiNichiji() {
+		return kaisaiNichiji;
+	}
+
+	/**
+	 * 角通過順位を返します
+	 * @return 角通過順位
+	 */
+	public String[] getKakuTsukaJuni() {
+		return kakuTsukaJuni;
+	}
+
+	/**
+	 * 競馬場名を返します
+	 * @return 競馬場
+	 */
+	public String getKeibajo() {
+		return keibajo;
+	}
+
+	/**
+	 * 競馬場コードを返します
+	 * @return　競馬場コード
+	 */
+	public int getKeibajoCode() {
+		return keibajoCode;
+	}
+
+	/**
+	 * 後半3fタイムを返します
+	 * @return 後半3fタイム
+	 */
+	public BigDecimal getKohan3f() {
+		return kohan3f;
+	}
+
+	/**
+	 * 後半4fタイムを返します
+	 * @return 後半4fタイム
+	 */
+	public BigDecimal getKohan4f() {
+		return kohan4f;
+	}
+
+	/**
+	 * 施工されるレース距離を返します
+	 * @return 距離
+	 */
+	public int getKyori() {
+		return kyori;
+	}
+
+	/**
+	 * 競争条件を返します
+	 * @return 競争条件
+	 */
+	public String getKyosoJoken() {
+		return kyosoJoken;
+	}
+
+	/**
+	 * 競争記号を返します
+	 * @return 競争記号
+	 */
+	public String getKyosoKigo() {
+		return kyosoKigo;
+	}
+
+	/**
+	 * 競争名副題を返します
+	 * @return 競争名副題
+	 */
+	public String getKyosomeiFukudai() {
+		return kyosomeiFukudai;
+	}
+
+	/**
+	 * 競争名本題を返します
+	 * @return 競争名本題
+	 */
+	public String getKyosomeiHondai() {
+		return kyosomeiHondai;
+	}
+
+	/**
+	 * 競争名区分を返します
+	 * @return 競争名区分
+	 */
+	public int getKyosomeiKubun() {
+		return kyosomeiKubun;
+	}
+
+	/**
+	 * 競争名略称10文字を返します
+	 * @return 競争名略称10文字
+	 */
+	public String getKyosomeiRyaku10() {
+		return kyosomeiRyaku10;
+	}
+
+	/**
+	 * 競争種別を返します
+	 * @return 競争種別
+	 */
+	public String getKyosoShubetsu() {
+		return kyosoShubetsu;
+	}
+
+	/**
+	 * ラップタイムを配列で返します
+	 * @return ラップタイム
+	 */
+	public BigDecimal[] getLapTime() {
+		return lapTime;
+	}
+
+	/**
+	 * 入選頭数を返します
+	 * @return 入選頭数
+	 */
+	public int getNyusenTosu() {
+		return nyusenTosu;
+	}
+
+	/**
+	 * レース番号を返します
+	 * @return レース番号
+	 */
+	public int getRaceBango() {
+		return raceBango;
+	}
+
+	/**
+	 * レースコードを返します
+	 * @return レースコード
+	 */
+	public String getRaceCode() {
+		return raceCode;
+	}
+
+	/**
+	 * 芝馬場状態を返します
+	 * @return 芝馬場状態
+	 */
+	public String getShibaJotai() {
+		return shibaJotai;
+	}
+
+	/**
 	 * 周回数1を返します
 	 * @return 周回数1
 	 */
@@ -486,32 +463,77 @@ public class RaceDataDefault implements Serializable,Comparable<RaceDataSet>{
 	}
 
 	/**
-	 * 角通過順位を返します
-	 * @return 角通過順位
+	 * 出走頭数を返します
+	 * @return 出走頭数
 	 */
-	public String[] getKakuTsukaJuni() {
-		return kakuTsukaJuni;
+	public int getShussoTosu() {
+		return shussoTosu;
 	}
 
 	/**
-	 * 引数のインスタンスと比較を行います
+	 * 天候を返します
+	 * @return 天候
 	 */
-	@Override
-	public int compareTo(RaceDataSet o) {
-		if(this.raceBango > o.getRaceBango())
-			return 1;
-		if(this.raceBango < o.getRaceBango())
-			return -1;
-
-		return 0;
+	public String getTenko() {
+		return tenko;
 	}
 
 	/**
-	 * 競馬場コードを返します
-	 * @return　競馬場コード
+	 * 登録頭数を返します
+	 * @return 登録頭数
 	 */
-	public int getKeibajoCode() {
-		return keibajoCode;
+	public int getTorokuTosu() {
+		return torokuTosu;
+	}
+
+	/**
+	 * トラックコードを返します
+	 * @return トラックコード
+	 */
+	public String getTrackCode() {
+		return trackCode;
+	}
+
+	/**
+	 * 開催曜日を返します
+	 * @return 曜日
+	 */
+	public String getYobi() {
+		return yobi;
+	}
+
+	/**
+	 * 前半3fタイムを返します
+	 * @return 前半3fタイム
+	 */
+	public BigDecimal getZenhan3f() {
+		return zenhan3f;
+	}
+
+	/**
+	 * 前半4fタイムを返します
+	 * @return 前半4fタイム
+	 */
+	public BigDecimal getZenhan4f() {
+		return zenhan4f;
+	}
+
+	/**
+	 * 全てのレースの競争名を取得します
+	 * @param kyosomei セットする kyosomei
+	 */
+	private final void setKyosomei() {
+		kyosomei = getKyosomeiHondai().length()>0
+				   ?getKyosomeiRyaku10()
+				   :getKyosoShubetsu().substring(getKyosoShubetsu().indexOf("系")+1, getKyosoShubetsu().length()) + getKyosoJoken();
+	}
+
+	/**
+	 * 全てのレースの競争名を返します
+	 * @return kyosomei 競争名
+	 */
+	public String getKyosomei() {
+		return kyosomei;
 	}
 
 }

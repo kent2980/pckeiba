@@ -7,7 +7,9 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -24,6 +26,7 @@ public class UmagotoDrunLoad implements Serializable{
 	private String raceCode;
 	private Map<String,UmagotoDrunSet> drunList;
 	private Map<String,BigDecimal> drunMap;
+	private List<UmagotoDrunSet> drunSortList;
 
 	/**
 	 * コンストラクタ<br>
@@ -65,6 +68,7 @@ public class UmagotoDrunLoad implements Serializable{
 	public void setDrunList(String raceCode) {
 		drunMap = new HashMap<>();
 		drunList = new HashMap<>();
+		drunSortList = new ArrayList<>();
 		String sql = "CALL Drun_Out(?)";
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
@@ -79,8 +83,13 @@ public class UmagotoDrunLoad implements Serializable{
 			ResultSet rs = pstmt.executeQuery();
 			int t = 18; //Drun_Outテーブルの列数を指定します
 			while(rs.next()) {
-				drunList.put(rs.getString(7),new UmagotoDrunSet(rs.getString(1), rs.getString(2), rs.getString(3), rs.getInt(4), rs.getInt(5), rs.getString(6), rs.getString(7), rs.getDouble(8),rs.getBigDecimal(t-2),rs.getInt(t-1), rs.getInt(13), rs.getDouble(t), rs.getInt(14), rs.getInt(15)));
+				UmagotoDrunSet umagotoData = new UmagotoDrunSet(rs.getString("KAISAI_NENGAPPI"), rs.getString("RACE_CODE"), rs.getString("KYOSOMEI"), rs.getInt("WAKUBAN"),
+											 					rs.getInt("UMABAN"), rs.getString("BAMEI"), rs.getString("KETTO_TOROKU_BANGO"), rs.getDouble("FUTAN_JURYO"),
+											 					rs.getBigDecimal("DRUN"),rs.getInt("順位"), rs.getInt("KAKUTEI_CHAKUJUN"), rs.getDouble("BUNSAN"),
+											 					rs.getInt("BAREI"), rs.getInt("KYORI"), rs.getBigDecimal("1SOU"), rs.getBigDecimal("2SOU"), rs.getBigDecimal("3SOU"), rs.getBigDecimal("4SOU"));
+				drunList.put(rs.getString(7),umagotoData);
 				drunMap.put(rs.getString(7), rs.getBigDecimal(t-2));
+				drunSortList.add(umagotoData);
 			}
 
 
@@ -103,6 +112,14 @@ public class UmagotoDrunLoad implements Serializable{
 	 */
 	public Map<String,BigDecimal> getDrunMap(){
 		return drunMap;
+	}
+
+	public List<UmagotoDrunSet> getDrunSortList() {
+		return drunSortList;
+	}
+
+	public void setDrunSortList(List<UmagotoDrunSet> drunSortList) {
+		this.drunSortList = drunSortList;
 	}
 
 }

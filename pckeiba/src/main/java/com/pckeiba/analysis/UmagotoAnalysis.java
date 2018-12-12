@@ -4,10 +4,15 @@ import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 import java.util.stream.Collectors;
 
 import com.pckeiba.umagoto.UmagotoDataLoad;
+import com.pckeiba.umagoto.UmagotoDataSet;
 
 /**
  * 馬毎データから様々な分析を行うクラス
@@ -102,4 +107,152 @@ public class UmagotoAnalysis {
 			return "-";
 		}
 	}
+
+	/**
+	 * 馬毎の想定脚質を判定します
+	 * @param 血統登録番号
+	 * @return 想定脚質
+	 */
+	public int getPredictionKyakushitsuHantei(String kettoTorokuBango) {
+		List<Integer> hantei = umagotoData.getList().stream()
+													.filter(s -> s.getKettoTorokuBango().equals(kettoTorokuBango))
+													.filter(s -> s.getUmaID() > 1)
+													.filter(s -> s.getKyakushitsuHantei() > 0)
+													.map(s -> s.getKyakushitsuHantei())
+													.collect(Collectors.toList());
+		boolean fled = hantei.stream()
+				 			 .anyMatch(s -> s.intValue() == 1);
+		if(fled == true) {
+			return 1;
+		}
+		//脚質判定の最頻値を求めます
+		Map<Integer,Integer> modeMap = new HashMap<Integer, Integer>();
+		hantei.stream()
+		.forEach(x -> {
+			if( modeMap.containsKey(x) ){
+				modeMap.put(x, modeMap.get(x)+1);
+			} else {
+				modeMap.put(x, 1);
+			}
+		});
+
+		int maxValue = 0;
+		int maxKey = 0;
+
+		for (Entry<Integer, Integer> entry : modeMap.entrySet()) {
+			if (maxValue < entry.getValue()) {
+				maxValue = entry.getValue();
+				maxKey = entry.getKey();
+			}
+		}
+
+		return maxKey;
+	}
+
+	/**
+	 * 馬毎の想定脚質を判定します
+	 * @param 馬番
+	 * @return 想定脚質
+	 */
+	public int getPredictionKyakushitsuHantei(int umaban) {
+		List<Integer> hantei = umagotoData.getList().stream()
+													.filter(s -> s.getUmaGroup() == umaban)
+													.filter(s -> s.getUmaID() > 1)
+													.filter(s -> s.getKyakushitsuHantei() > 0)
+													.map(s -> s.getKyakushitsuHantei())
+													.collect(Collectors.toList());
+		boolean fled = hantei.stream()
+							 .anyMatch(s -> s.intValue() == 1);
+		if(fled == true) {
+			return 1;
+		}
+		//脚質判定の最頻値を求めます
+		Map<Integer,Integer> modeMap = new HashMap<Integer, Integer>();
+		hantei.stream()
+		.forEach(x -> {
+			if( modeMap.containsKey(x) ){
+				modeMap.put(x, modeMap.get(x)+1);
+			} else {
+				modeMap.put(x, 1);
+			}
+		});
+
+		int maxValue = 0;
+		int maxKey = 0;
+
+		for (Entry<Integer, Integer> entry : modeMap.entrySet()) {
+			if (maxValue < entry.getValue()) {
+				maxValue = entry.getValue();
+				maxKey = entry.getKey();
+			}
+		}
+
+		return maxKey;
+	}
+
+	/**
+	 * 馬毎の想定脚質を返します
+	 * @param 馬番
+	 * @return 想定脚質
+	 */
+	public String getPredictionKyakushitsu(int umaban) {
+		int hantei = getPredictionKyakushitsuHantei(umaban);
+
+		switch(hantei) {
+		case 1:
+			return "逃げ";
+		case 2:
+			return "先行";
+		case 3:
+			return "差し";
+		case 4:
+			return "追込";
+		default:
+			return "不明";
+		}
+	}
+
+	/**
+	 * 馬毎の想定脚質を返します
+	 * @param 血統登録番号
+	 * @return 想定脚質
+	 */
+	public String getPredictionKyakushitsu(String kettoTorokuBango) {
+		int hantei = getPredictionKyakushitsuHantei(kettoTorokuBango);
+
+		switch(hantei) {
+		case 1:
+			return "逃げ";
+		case 2:
+			return "先行";
+		case 3:
+			return "差し";
+		case 4:
+			return "追込";
+		default:
+			return "不明";
+		}
+	}
+
+	/**
+	 * 指定した脚質に属する馬名を返します
+	 * @param kyakushitsu　脚質	1→逃げ,2→先行,3→差し,4→追込み
+	 * @return　馬名一覧
+	 */
+	public List<String> getKyakushitsuLabel(int kyakushitsu) {
+		List<UmagotoDataSet> list = umagotoData.getList();
+		List<String> kyakushitsuLabel = new ArrayList<>();
+		for(int i = 0; i < list.size(); i++) {
+			String bamei = list.get(i).getBamei();
+			String kettoTorokuBango = list.get(i).getKettoTorokuBango();
+			int hantei = getPredictionKyakushitsuHantei(kettoTorokuBango);
+			if(hantei == kyakushitsu) {
+				kyakushitsuLabel.add(bamei);
+			}
+		}
+		return kyakushitsuLabel.stream()
+							   .distinct()
+							   .collect(Collectors.toList());
+	}
+
 }

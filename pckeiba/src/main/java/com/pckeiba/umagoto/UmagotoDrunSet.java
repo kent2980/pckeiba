@@ -29,6 +29,10 @@ public class UmagotoDrunSet implements Serializable{
 	private final double bunsan;
 	private final int barei;
 	private final int kyori;
+	private final BigDecimal Srun_1sou;
+	private final BigDecimal Srun_2sou;
+	private final BigDecimal Srun_3sou;
+	private final BigDecimal Srun_4sou;
 
 	/**
 	 *
@@ -46,9 +50,14 @@ public class UmagotoDrunSet implements Serializable{
 	 * @param bunsan Srunの分散値
 	 * @param barei 馬齢
 	 * @param kyori 距離
+	 * @param srun_1sou １走前のSRun
+	 * @param srun_2sou 2走前のSRun
+	 * @param srun_3sou 3走前のSRun
+	 * @param srun_4sou 4走前のSRun
 	 */
 	public UmagotoDrunSet(String kaisaiNenGappi, String raceCode, String kyosomei, int wakuban, int umaban,
-			String bamei, String kettoTorokuBango, double futanJuryo,  BigDecimal drun, int drunRunk, int kakuteiChakujun, double bunsan, int barei, int kyori) {
+			String bamei, String kettoTorokuBango, double futanJuryo,  BigDecimal drun, int drunRunk, int kakuteiChakujun, double bunsan,
+			int barei, int kyori, BigDecimal srun_1sou, BigDecimal srun_2sou, BigDecimal srun_3sou, BigDecimal srun_4sou) {
 		super();
 		this.kaisaiNenGappi = kaisaiNenGappi;
 		this.raceCode = raceCode;
@@ -64,6 +73,38 @@ public class UmagotoDrunSet implements Serializable{
 		this.bunsan = bunsan;
 		this.barei = barei;
 		this.kyori = kyori;
+		this.Srun_1sou = srun_1sou;
+		this.Srun_2sou = srun_2sou;
+		this.Srun_3sou = srun_3sou;
+		this.Srun_4sou = srun_4sou;
+	}
+
+	/**
+	 * @return srun_1sou １走前のSRunを返します
+	 */
+	public BigDecimal getSrun_1sou() {
+		return Srun_1sou;
+	}
+
+	/**
+	 * @return srun_2sou 2走前のSRunを返します
+	 */
+	public BigDecimal getSrun_2sou() {
+		return Srun_2sou;
+	}
+
+	/**
+	 * @return srun_3sou 3走前のSRunを返します
+	 */
+	public BigDecimal getSrun_3sou() {
+		return Srun_3sou;
+	}
+
+	/**
+	 * @return srun_4sou 4走前のSRunを返します
+	 */
+	public BigDecimal getSrun_4sou() {
+		return Srun_4sou;
 	}
 
 	/**

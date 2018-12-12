@@ -69,12 +69,8 @@ public class RaceDataSet extends RaceDataDefault{
 	private BigDecimal ave3f;
 	private BigDecimal srunRow;
 	private BigDecimal srun55;
+	private int jushoKaijiCode;
 
-	/**
-	 * コンストラクタ<br>
-	 * nullなオブジェクトを生成します
-	 */
-	public RaceDataSet() {}
 
 	/**
 	 * コンストラクタ<br>
@@ -181,6 +177,7 @@ public class RaceDataSet extends RaceDataDefault{
 		this.ave3f = ave3f;
 		this.srunRow = srunRow;
 		this.srun55 = srun55;
+		setJushoKaijiCode();
 	}
 
 	/**
@@ -574,6 +571,21 @@ public class RaceDataSet extends RaceDataDefault{
 	 */
 	public BigDecimal getSrun55() {
 		return srun55;
+	}
+
+	public int getJushoKaijiCode() {
+		return jushoKaijiCode;
+	}
+
+	/**
+	 * @param jushoKaijiCode セットする jushoKaijiCode
+	 */
+	private final void setJushoKaijiCode() {
+		if(JushoKaiji == 0) {
+			jushoKaijiCode = 0;
+		}else {
+			jushoKaijiCode = 1;
+		}
 	}
 
 }

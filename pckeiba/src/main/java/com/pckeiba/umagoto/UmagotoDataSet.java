@@ -102,6 +102,7 @@ public class UmagotoDataSet implements Serializable {
 	private final BigDecimal ave3f;
 	private final BigDecimal raceSrun;
 	private final BigDecimal srun55;
+	private final int kyakushitsuHantei;
 
 	/**
 	 * コンストラクタ finalなプロパティを設定します。
@@ -182,6 +183,7 @@ public class UmagotoDataSet implements Serializable {
 	 * @param ave3f 平均3F
 	 * @param raceSrun レースのSRUN
 	 * @param srun55 斤量55kgにおけるSRUN
+	 * @param kyakushitsuHantei 脚質判定
 	 */
 	public UmagotoDataSet(int umaGroup, String dataKubun, String raceCode, String kaisaiNenGappi, String bamei,
 			String keibajo, int kaisaiKaiji, int kaisaiNichiji, int raceBango, int wakuban, int umaban,
@@ -196,7 +198,7 @@ public class UmagotoDataSet implements Serializable {
 			int jushoKaiji, int kyori, String hassoJikoku, BigDecimal srun,  String aiteBamei1, String aiteBamei2,
 			String father, String mother, String grandFather, int torokuTosu, int shussoTosu, int umaID, int srunCount,
 			BigDecimal raceZenhan3f, BigDecimal raceZenhan4f, BigDecimal raceKohan3f, BigDecimal raceKohan4f, BigDecimal RPCI,
-			BigDecimal fPCI, String kyakushitsu, BigDecimal ave3f, BigDecimal raceSrun, BigDecimal srun55) {
+			BigDecimal fPCI, String kyakushitsu, BigDecimal ave3f, BigDecimal raceSrun, BigDecimal srun55, int kyakushitsuHantei) {
 		this.UmaGroup = umaGroup;
 		this.DataKubun = dataKubun;
 		this.raceCode = raceCode;
@@ -275,6 +277,7 @@ public class UmagotoDataSet implements Serializable {
 		this.ave3f = ave3f;
 		this.raceSrun = raceSrun;
 		this.srun55 = srun55;
+		this.kyakushitsuHantei = kyakushitsuHantei;
 	}
 
 	/**
@@ -952,6 +955,13 @@ public class UmagotoDataSet implements Serializable {
 	 */
 	public BigDecimal getSrun55() {
 		return srun55;
+	}
+
+	/** 脚質判定を返します
+	 * @return 脚質判定
+	 */
+	public int getKyakushitsuHantei() {
+		return kyakushitsuHantei;
 	}
 
 }
