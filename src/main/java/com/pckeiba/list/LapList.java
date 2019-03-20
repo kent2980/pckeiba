@@ -24,32 +24,7 @@ public class LapList extends ArrayList<BigDecimal> {
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
-	public static void main(String[] args) {
-		BigDecimal one = BigDecimal.ONE;
-		BigDecimal two = BigDecimal.valueOf(2);
-		BigDecimal ten = BigDecimal.TEN;
-		LapList list = new LapList();
-		list.add(BigDecimal.valueOf(12.1));
-		list.add(BigDecimal.valueOf(5.7));
-		list.add(BigDecimal.valueOf(7.7));
-		list.add(BigDecimal.valueOf(12.1));
-		list.add(BigDecimal.valueOf(22.8));
-		list.add(BigDecimal.valueOf(14.9));
-		list.add(BigDecimal.valueOf(12.8));
-		list.add(BigDecimal.valueOf(12.5));
-		list.add(BigDecimal.valueOf(10.8));
-		list.add(BigDecimal.valueOf(11.9));
-		for(BigDecimal time: list) {
-			System.out.println(time);
-		}
-		System.out.println(list.getKyori());
-		System.out.println("最も遅いポイントは" + list.getSlowSpeedPoint());
-		System.out.println("最も速いポイントは" + list.getHiSpeedPoint());
-		System.out.println("最も遅くなったポイントとは" + list.getSpeedLowerPoint());
-		System.out.println("最も速くなったポイントとは" + list.getSpeedUpperPoint());
-		System.out.println("次の地点のスピードレベルは" + list.getSpeedLevel(4));
-		System.out.println("レースの上がり3Fは" + list.getRaceKohan3f());
-	}
+
 	private int kyori;
 	private int hiSpeedPoint;
 	private int slowSpeedPoint;
@@ -58,6 +33,10 @@ public class LapList extends ArrayList<BigDecimal> {
 	private int speedLowerPoint;
 	private BigDecimal raceKohan3f;
 	private String lapType;
+	private String advantage;
+	private BigDecimal zenhan1000mAverageLap;
+	private BigDecimal cornerAverageLap;
+	private BigDecimal kohan3fAverageLap;
 
 	/**
 	 *
@@ -78,6 +57,9 @@ public class LapList extends ArrayList<BigDecimal> {
 			this.setSpeedUpperPoint();
 			this.setRaceKohan3f();
 			this.setLapType();
+			this.setKohan3fAverageLap();
+			this.setCornerAverageLap();
+			this.setZenhan1000mAverageLap();
 			return flag;
 		}
 		return false;
@@ -97,6 +79,9 @@ public class LapList extends ArrayList<BigDecimal> {
 			this.setSpeedUpperPoint();
 			this.setRaceKohan3f();
 			this.setLapType();
+			this.setKohan3fAverageLap();
+			this.setCornerAverageLap();
+			this.setZenhan1000mAverageLap();
 		}
 	}
 
@@ -300,6 +285,51 @@ public class LapList extends ArrayList<BigDecimal> {
 			}
 		}else {
 			this.lapType = null;
+		}
+	}
+
+	public String getAdvantage() {
+		return advantage;
+	}
+	public void setAdvantage() {}
+
+	public BigDecimal getZenhan1000mAverageLap() {
+		return zenhan1000mAverageLap;
+	}
+
+	private void setZenhan1000mAverageLap() {
+		BigDecimal lap = BigDecimal.ZERO;
+		if(this.size() >= 5) {
+			BigDecimal drive = BigDecimal.valueOf(5);
+			if(this.get(0).compareTo(BigDecimal.TEN) < 0) {
+				drive = BigDecimal.valueOf(4.5);
+			}
+			for(int i = 0; i < 5; i++) {
+				lap = lap.add(this.get(i));
+			}
+			lap = lap.divide(drive, 1, BigDecimal.ROUND_HALF_UP);
+		}
+		this.zenhan1000mAverageLap = lap;
+	}
+
+	public BigDecimal getCornerAverageLap() {
+		return cornerAverageLap;
+	}
+
+	private void setCornerAverageLap() {
+		if(this.size() >= 4) {
+			this.cornerAverageLap = this.get(this.size()-4);
+		}
+	}
+
+	public BigDecimal getKohan3fAverageLap() {
+		return kohan3fAverageLap;
+	}
+
+	private void setKohan3fAverageLap() {
+		if(this.size() >= 3) {
+			BigDecimal lap = this.getRaceKohan3f().divide(BigDecimal.valueOf(3), 1, BigDecimal.ROUND_HALF_UP);
+			this.kohan3fAverageLap = lap;
 		}
 	}
 }
