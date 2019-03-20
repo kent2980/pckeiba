@@ -37,6 +37,8 @@ public class LapList extends ArrayList<BigDecimal> {
 	private BigDecimal zenhan1000mAverageLap;
 	private BigDecimal cornerAverageLap;
 	private BigDecimal kohan3fAverageLap;
+	private String racePace;
+	private String raceType;
 
 	/**
 	 *
@@ -60,6 +62,8 @@ public class LapList extends ArrayList<BigDecimal> {
 			this.setKohan3fAverageLap();
 			this.setCornerAverageLap();
 			this.setZenhan1000mAverageLap();
+			this.setRacePace();
+			this.setRaceType();
 			return flag;
 		}
 		return false;
@@ -82,6 +86,8 @@ public class LapList extends ArrayList<BigDecimal> {
 			this.setKohan3fAverageLap();
 			this.setCornerAverageLap();
 			this.setZenhan1000mAverageLap();
+			this.setRacePace();
+			this.setRaceType();
 		}
 	}
 
@@ -291,7 +297,7 @@ public class LapList extends ArrayList<BigDecimal> {
 	public String getAdvantage() {
 		return advantage;
 	}
-	public void setAdvantage() {}
+	private void setAdvantage() {}
 
 	public BigDecimal getZenhan1000mAverageLap() {
 		return zenhan1000mAverageLap;
@@ -330,6 +336,86 @@ public class LapList extends ArrayList<BigDecimal> {
 		if(this.size() >= 3) {
 			BigDecimal lap = this.getRaceKohan3f().divide(BigDecimal.valueOf(3), 1, BigDecimal.ROUND_HALF_UP);
 			this.kohan3fAverageLap = lap;
+		}
+	}
+
+	/**
+	 * @return racePace
+	 */
+	public String getRacePace() {
+		return racePace;
+	}
+
+	/**
+	 * @param racePace セットする racePace
+	 */
+	private void setRacePace() {
+		if(this.size() > 5) {
+			BigDecimal lapSum1 = BigDecimal.ZERO;
+			int i = 0;
+			for(; i < this.size(); i++) {
+				BigDecimal lap = this.get(i);
+				if(lap.compareTo(BigDecimal.TEN) < 0) {
+					lap = lap.multiply(BigDecimal.valueOf(2));
+				}
+				lapSum1 = lapSum1.add(lap);
+				if(i + 1 >= this.size() / 2) {
+					i++;
+					break;
+				}
+			}
+			BigDecimal lapSum2 = BigDecimal.ZERO;
+			if((this.kyori/200)%2 != 0) {
+				i++;
+			}
+			for(; i < this.size(); i++) {
+				lapSum2 = lapSum2.add(this.get(i));
+			}
+			System.out.println("距離：" + kyori + ",前半：" + lapSum1 + ",後半：" + lapSum2);
+			if(lapSum1.add(BigDecimal.ONE).compareTo(lapSum2) < 0) {
+				this.racePace = "Hi";
+			}else if(lapSum2.add(BigDecimal.ONE).compareTo(lapSum1) < 0) {
+				this.racePace = "Slow";
+			}else {
+				this.racePace = "Middle";
+			}
+		}
+	}
+
+	/**
+	 * @return raceType
+	 */
+	public String getRaceType() {
+		return raceType;
+	}
+
+	/**
+	 * @param raceType セットする raceType
+	 */
+	private void setRaceType() {
+		if(this.size() > 5) {
+			switch(this.getRacePace()) {
+			case "Slow":
+				if(this.zenhan1000mAverageLap.compareTo(this.cornerAverageLap) > 0 & this.cornerAverageLap.compareTo(this.kohan3fAverageLap) > 0) {
+					raceType = "右肩上がり型";
+				}else {
+					raceType = "ヨーイドン型";
+				}
+				break;
+			case "Hi":
+				if(this.zenhan1000mAverageLap.compareTo(this.cornerAverageLap.subtract(BigDecimal.valueOf(0.5))) < 0) {
+					raceType = "直線手前スロー型";
+				}else {
+					raceType = "一本調子型";
+				}
+				break;
+			case "Middle":
+				if(this.get(this.getHiSpeedPoint()).add(BigDecimal.ONE).compareTo(this.get(this.getSlowSpeedPoint())) > 0) {
+					raceType = "緩急型";
+				}else {
+					raceType = "一定型";
+				}
+			}
 		}
 	}
 }
