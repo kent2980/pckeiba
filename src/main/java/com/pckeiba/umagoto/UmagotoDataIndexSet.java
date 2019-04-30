@@ -25,7 +25,7 @@ public class UmagotoDataIndexSet implements Serializable,Comparable<UmagotoDataI
 	private final int tanshoNinkijun;
 	private final String kettoTorokuBango;
 	private final int kyakushitsuCode;
-	private final String kyakushitsu;
+	private String kyakushitsu;
 	private final BigDecimal drun;
 	private final int averageKyori;
 	private final int maxKyori;
@@ -59,7 +59,7 @@ public class UmagotoDataIndexSet implements Serializable,Comparable<UmagotoDataI
 		this.tanshoNinkijun = tanshoNinkijun;
 		this.kettoTorokuBango = kettoTorokuBango;
 		this.kyakushitsuCode = kyakushitsuCode;
-		this.kyakushitsu = setKyakushitsu();
+		setKyakushitsu();
 		this.drun = drun;
 		this.averageKyori = averageKyori;
 		this.maxKyori = maxKyori;
@@ -74,19 +74,19 @@ public class UmagotoDataIndexSet implements Serializable,Comparable<UmagotoDataI
 	 * 脚質コードから脚質に変換します
 	 * @return　脚質
 	 */
-	private String setKyakushitsu() {
+	private void setKyakushitsu() {
 
 		switch(kyakushitsuCode) {
 		case 1:
-			return "逃げ";
+			this.kyakushitsu = "逃げ";
 		case 2:
-			return "先行";
+			this.kyakushitsu = "先行";
 		case 3:
-			return "差し";
+			this.kyakushitsu = "差し";
 		case 4:
-			return "追込";
+			this.kyakushitsu = "追込";
 		default:
-			return "不明";
+			this.kyakushitsu = "不明";
 		}
 	}
 

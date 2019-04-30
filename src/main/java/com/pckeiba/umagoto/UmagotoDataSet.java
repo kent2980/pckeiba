@@ -64,7 +64,7 @@ public class UmagotoDataSet implements Serializable {
 	private final int tanshoNinkijun;
 	private final BigDecimal kohan4F;
 	private final BigDecimal kohan3F;
-	private final String timeSa;
+	private final BigDecimal timeSa;
 	private final String yobi;
 	private final String grade;
 	private final String kyosoShubetsu;
@@ -105,6 +105,7 @@ public class UmagotoDataSet implements Serializable {
 	private final BigDecimal srun55;
 	private final int kyakushitsuHantei;
 	private final LapList lap;
+	private final BigDecimal PCI;
 
 	/**
 	 * コンストラクタ finalなプロパティを設定します。
@@ -195,14 +196,14 @@ public class UmagotoDataSet implements Serializable {
 			String kishumei, String kishumeiRyakusho, String kishuMinarai, int bataiju, String zogensa, String ijoKubun,
 			int nyusenJuni, int kakuteiChakujun, BigDecimal sohaTime, int corner1Juni, int corner2Juni, int corner3Juni,
 			int corner4Juni, double tanshoOdds, int tanshoNinkijun, BigDecimal kohan4f, BigDecimal kohan3f,
-			double timeSa, String yobi, String grade, String kyosoShubetsu, String kyosoKigo, String juryoShubetsu,
+			BigDecimal timeSa, String yobi, String grade, String kyosoShubetsu, String kyosoKigo, String juryoShubetsu,
 			String kyosoJoken, String trackCode, String tenko, String shibaBabaJotai, String dirtBabaJotai,
 			String kyosomeiHondai, String kyosomeiRyakusho10, String kyosomeiRyakusho6, int kyosomeiKubun,
 			int jushoKaiji, int kyori, String hassoJikoku, BigDecimal srun,  String aiteBamei1, String aiteBamei2,
 			String father, String mother, String grandFather, int torokuTosu, int shussoTosu, int umaID, int srunCount,
 			BigDecimal raceZenhan3f, BigDecimal raceZenhan4f, BigDecimal raceKohan3f, BigDecimal raceKohan4f, BigDecimal RPCI,
 			BigDecimal fPCI, String kyakushitsu, BigDecimal ave3f, BigDecimal raceSrun, BigDecimal srun55, int kyakushitsuHantei,
-			LapList lap) {
+			LapList lap, BigDecimal PCI) {
 		this.UmaGroup = umaGroup;
 		this.DataKubun = dataKubun;
 		this.raceCode = raceCode;
@@ -242,7 +243,7 @@ public class UmagotoDataSet implements Serializable {
 		this.tanshoNinkijun = tanshoNinkijun;
 		kohan4F = kohan4f;
 		kohan3F = kohan3f;
-		this.timeSa = timeSa>0?"+" + timeSa:String.valueOf(timeSa);
+		this.timeSa = timeSa;
 		this.yobi = yobi;
 		this.grade = grade;
 		this.kyosoShubetsu = kyosoShubetsu;
@@ -283,6 +284,7 @@ public class UmagotoDataSet implements Serializable {
 		this.srun55 = srun55;
 		this.kyakushitsuHantei = kyakushitsuHantei;
 		this.lap = lap;
+		this.PCI = PCI;
 	}
 
 	/**
@@ -637,7 +639,7 @@ public class UmagotoDataSet implements Serializable {
 	 * 1着馬とのタイム差を返します。<br>勝ち馬の場合は、2着馬とのタイム差を返します。
 	 * @return タイム差
 	 */
-	public String getTimeSa() {
+	public BigDecimal getTimeSa() {
 		return timeSa;
 	}
 
@@ -971,6 +973,10 @@ public class UmagotoDataSet implements Serializable {
 
 	public LapList getLap() {
 		return lap;
+	}
+
+	public BigDecimal getPCI() {
+		return PCI;
 	}
 
 }

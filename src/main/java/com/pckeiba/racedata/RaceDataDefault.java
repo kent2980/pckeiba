@@ -522,7 +522,7 @@ public class RaceDataDefault implements Serializable,Comparable<RaceDataSet>{
 	 * 全てのレースの競争名を取得します
 	 * @param kyosomei セットする kyosomei
 	 */
-	private final void setKyosomei() {
+	protected final void setKyosomei() {
 		kyosomei = getKyosomeiHondai().length()>0
 				   ?getKyosomeiRyaku10()
 				   :getKyosoShubetsu().substring(getKyosoShubetsu().indexOf("系")+1, getKyosoShubetsu().length()) + getKyosoJoken();

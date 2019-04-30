@@ -184,6 +184,7 @@ public class RaceDataSet extends RaceDataDefault{
 		setJushoKaijiCode();
 		this.winningHorse = winningHorse;
 		this.tokubetsuTorokuBango = tokubetsuTorokuBango;
+		setKyosomei();
 	}
 
 	/**

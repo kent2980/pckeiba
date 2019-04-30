@@ -371,7 +371,6 @@ public class LapList extends ArrayList<BigDecimal> {
 			for(; i < this.size(); i++) {
 				lapSum2 = lapSum2.add(this.get(i));
 			}
-			System.out.println("距離：" + kyori + ",前半：" + lapSum1 + ",後半：" + lapSum2);
 			if(lapSum1.add(BigDecimal.ONE).compareTo(lapSum2) < 0) {
 				this.racePace = "Hi";
 			}else if(lapSum2.add(BigDecimal.ONE).compareTo(lapSum1) < 0) {
@@ -396,10 +395,10 @@ public class LapList extends ArrayList<BigDecimal> {
 		if(this.size() > 5) {
 			switch(this.getRacePace()) {
 			case "Slow":
-				if(this.zenhan1000mAverageLap.compareTo(this.cornerAverageLap) > 0 & this.cornerAverageLap.compareTo(this.kohan3fAverageLap) > 0) {
-					raceType = "右肩上がり型";
-				}else {
+				if(this.zenhan1000mAverageLap.compareTo(this.cornerAverageLap) <= 0 & this.cornerAverageLap.compareTo(this.kohan3fAverageLap) > 0) {
 					raceType = "ヨーイドン型";
+				}else {
+					raceType = "右肩上がり型";
 				}
 				break;
 			case "Hi":
